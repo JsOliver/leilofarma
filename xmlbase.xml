@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<info>
+
+<produto>
+<nome>Formula Produto</nome>
+<formula>Formula Produto</formula>
+<substancia>Formula Produto</substancia>
+<categoria>Categoria Produto</categoria>
+<laboratorio>Laboratorio Produto</laboratorio>
+<fixacal>Fixa do Produto</fixacal>
+
+<opcional>
+<miligramas>Miligramas Produto</miligramas>
+<indicacoes>Categoria Produto</indicacoes>
+<contraIndicacoes>Categoria Produto</contraIndicacoes>
+<posologia>Categoria Produto</posologia>
+<CaracteristicasFarmacologicas>Categoria Produto</CaracteristicasFarmacologicas>
+<armazenagem>Categoria Produto</armazenagem>
+</opcional>
+
+</produto>
+<produto>
+<nome>Formula Produto</nome>
+<formula>Formula Produto</formula>
+<substancia>Formula Produto</substancia>
+<categoria>Categoria Produto</categoria>
+<laboratorio>Laboratorio Produto</laboratorio>
+<fixacal>Fixa do Produto</fixacal>
+
+<opcional>
+<miligramas>Miligramas Produto</miligramas>
+<indicacoes>Categoria Produto</indicacoes>
+<contraIndicacoes>Categoria Produto</contraIndicacoes>
+<posologia>Categoria Produto</posologia>
+<CaracteristicasFarmacologicas>Categoria Produto</CaracteristicasFarmacologicas>
+<armazenagem>Categoria Produto</armazenagem>
+</opcional>
+
+</produto>
+<produto>
+<nome>Formula Produto</nome>
+<formula>Formula Produto</formula>
+<substancia>Formula Produto</substancia>
+<categoria1>Categoria Produto</categoria1>
+<categoria2>Categoria Produto</categoria2>
+<laboratorio>Laboratorio Produto</laboratorio>
+<fixacal>Fixa do Produto</fixacal>
+<preco>20.00</preco>
+<desconto>5</desconto>
+<unidades>100</unidades>
+
+<opcional>
+<miligramas>Miligramas Produto</miligramas>
+<indicacoes>Categoria Produto</indicacoes>
+<contraIndicacoes>Categoria Produto</contraIndicacoes>
+<posologia>Categoria Produto</posologia>
+<CaracteristicasFarmacologicas>Categoria Produto</CaracteristicasFarmacologicas>
+<armazenagem>Categoria Produto</armazenagem>
+</opcional>
+
+</produto>
+<produto>
+<nome>Formula Produto</nome>
+<formula>Formula Produto</formula>
+<substancia>Formula Produto</substancia>
+<categoria>Categoria Produto</categoria>
+<laboratorio>Laboratorio Produto</laboratorio>
+<fixacal>Fixa do Produto</fixacal>
+
+<opcional>
+<miligramas>Miligramas Produto</miligramas>
+<indicacoes>Categoria Produto</indicacoes>
+<contraIndicacoes>Categoria Produto</contraIndicacoes>
+<posologia>Categoria Produto</posologia>
+<CaracteristicasFarmacologicas>Categoria Produto</CaracteristicasFarmacologicas>
+<armazenagem>Categoria Produto</armazenagem>
+</opcional>
+
+</produto>
+
+</info>

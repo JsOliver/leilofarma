@@ -1,0 +1,340 @@
+
+
+a{
+    text-decoration: none;
+}
+
+.navbar-brand {
+    transform: translateX(-50%);
+    left: 50%;
+    position: absolute;
+    color: #ffffff;
+    font-size: 30pt;
+    margin-top: 30px;
+}
+#busca {
+    transform: translateX(-50%);
+    left: 50%;
+    position: absolute;
+    color: #ffffff;
+    margin-top: 60px;
+    width: 40%;
+    z-index: 0;
+    border: none;
+
+
+}
+#busca input{
+    width: 95%;
+    border-radius: 20px;
+    position: absolute;
+    z-index: 0;
+}
+#busca #submit{
+
+}
+
+.navfarm{
+    background: #b01b1f;
+    border: none;
+    border-radius: 0px;
+    height: 200px;
+}
+
+#linksheader li{
+    padding: 0;
+}
+
+#linksheader li a {
+    color: #ffffff;
+
+}
+
+#linksheader .open
+{
+    background: none;
+}
+
+
+
+#linksheader li a {
+    border-top: 3px solid #b01b1f;
+}
+#linksheader li .active{
+
+
+    border-top: 3px solid #facf0d;
+    color: #facf0d;
+}
+
+.dropdown-menu-top{
+    background: #b01b1f;
+}
+
+.faixa-darkred{
+
+    background: #940f14;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 0px;
+}
+
+
+.faixa-darkred-sub{
+    transform: translateX(-35%);
+    left: 35%;
+    position: absolute;
+    color: #ffffff;
+    width: 90%;
+    padding: 0 0 0 10%;
+}
+
+.cards{
+
+    margin: -50px 0 0 19%;
+    float: left;
+}
+
+.cards-pill{
+    float: left;
+}
+
+.cards-pill i {
+
+    color: white;
+    font-size: 40pt;
+}
+
+.cards-pill p {
+
+    text-align: center;
+    margin: 0 0 0 -140px;
+}
+.licards{
+    width: 25%;
+    margin: 0 75px 0 0;
+
+}
+#cardlink{
+    margin: 0 180px 0 0;
+    padding:20px 80px 25px 25px;
+    border-radius:50%;
+    border:5px solid #ffffff;
+    background:#b01b1f;
+
+}
+.licards-last{
+    width: 30%;
+}
+#cardlink-last{
+    margin: 0 180px 0 0;
+    padding:20px 80px 25px 25px;
+    border-radius:50%;
+    border:5px solid #ffffff;
+    background:#b01b1f;
+
+}
+.banner-top{
+    margin: 0 0 0 22%;
+    float: left;
+}
+
+.filtro {
+    float: left;
+    width: 95%;
+    margin-top: 25px;
+}
+
+.inputs-filtro {
+
+    float: right;
+
+}
+
+.categoria-filtro {
+
+    margin-top: 3px;
+    border: none;
+    resize: none;
+    padding: 5px 5px 5px 2px;
+    outline: 0;
+    color: #940f14;
+}
+
+.farmaceutica-filtro {
+
+    margin-top: 3px;
+    border: none;
+    resize: none;
+    outline: 0;
+    padding: 5px 5px 5px 2px;
+    color: #940f14;
+
+}
+#slider-text{
+    padding-top: 40px;
+    display: block;
+}
+#slider-text .col-md-6{
+    overflow: hidden;
+}
+
+#slider-text h2 {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 400;
+    font-size: 30px;
+    letter-spacing: 3px;
+    margin: 30px auto;
+    padding-left: 40px;
+}
+#slider-text h2::after{
+    border-top: 2px solid #c7c7c7;
+    content: "";
+    position: absolute;
+    bottom: 35px;
+    width: 100%;
+}
+
+#itemslider h4{
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    margin: 10px auto 3px;
+}
+#itemslider h5{
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+    margin: 3px auto 2px;
+}
+#itemslider h6{
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 300;;
+    font-size: 10px;
+    margin: 2px auto 5px;
+}
+.badge {
+    background: #b20c0c;
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    line-height: 31px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    border: 2px solid #FFF;
+    box-shadow: 0 0 0 1px #b20c0c;
+    top: 5px;
+    right: 25%;
+}
+#slider-control img{
+    padding-top: 60%;
+    margin: 0 auto;
+}
+@media screen and (max-width: 992px){
+    #slider-control img {
+        padding-top: 70px;
+        margin: 0 auto;
+    }
+}
+
+.carousel-showmanymoveone .carousel-control {
+    width: 4%;
+    background-image: none;
+}
+.carousel-showmanymoveone .carousel-control.left {
+    margin-left: 5px;
+}
+.carousel-showmanymoveone .carousel-control.right {
+    margin-right: 5px;
+}
+.carousel-showmanymoveone .cloneditem-1,
+.carousel-showmanymoveone .cloneditem-2,
+.carousel-showmanymoveone .cloneditem-3,
+.carousel-showmanymoveone .cloneditem-4,
+.carousel-showmanymoveone .cloneditem-5 {
+    display: none;
+}
+@media all and (min-width: 768px) {
+    .carousel-showmanymoveone .carousel-inner > .active.left,
+    .carousel-showmanymoveone .carousel-inner > .prev {
+        left: -50%;
+    }
+    .carousel-showmanymoveone .carousel-inner > .active.right,
+    .carousel-showmanymoveone .carousel-inner > .next {
+        left: 50%;
+    }
+    .carousel-showmanymoveone .carousel-inner > .left,
+    .carousel-showmanymoveone .carousel-inner > .prev.right,
+    .carousel-showmanymoveone .carousel-inner > .active {
+        left: 0;
+    }
+    .carousel-showmanymoveone .carousel-inner .cloneditem-1 {
+        display: block;
+    }
+}
+@media all and (min-width: 768px) and (transform-3d), all and (min-width: 768px) and (-webkit-transform-3d) {
+    .carousel-showmanymoveone .carousel-inner > .item.active.right,
+    .carousel-showmanymoveone .carousel-inner > .item.next {
+        -webkit-transform: translate3d(50%, 0, 0);
+        transform: translate3d(50%, 0, 0);
+        left: 0;
+    }
+    .carousel-showmanymoveone .carousel-inner > .item.active.left,
+    .carousel-showmanymoveone .carousel-inner > .item.prev {
+        -webkit-transform: translate3d(-50%, 0, 0);
+        transform: translate3d(-50%, 0, 0);
+        left: 0;
+    }
+    .carousel-showmanymoveone .carousel-inner > .item.left,
+    .carousel-showmanymoveone .carousel-inner > .item.prev.right,
+    .carousel-showmanymoveone .carousel-inner > .item.active {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+        left: 0;
+    }
+}
+@media all and (min-width: 992px) {
+    .carousel-showmanymoveone .carousel-inner > .active.left,
+    .carousel-showmanymoveone .carousel-inner > .prev {
+        left: -16.666%;
+    }
+    .carousel-showmanymoveone .carousel-inner > .active.right,
+    .carousel-showmanymoveone .carousel-inner > .next {
+        left: 16.666%;
+    }
+    .carousel-showmanymoveone .carousel-inner > .left,
+    .carousel-showmanymoveone .carousel-inner > .prev.right,
+    .carousel-showmanymoveone .carousel-inner > .active {
+        left: 0;
+    }
+    .carousel-showmanymoveone .carousel-inner .cloneditem-2,
+    .carousel-showmanymoveone .carousel-inner .cloneditem-3,
+    .carousel-showmanymoveone .carousel-inner .cloneditem-4,
+    .carousel-showmanymoveone .carousel-inner .cloneditem-5,
+    .carousel-showmanymoveone .carousel-inner .cloneditem-6  {
+        display: block;
+    }
+}
+@media all and (min-width: 992px) and (transform-3d), all and (min-width: 992px) and (-webkit-transform-3d) {
+    .carousel-showmanymoveone .carousel-inner > .item.active.right,
+    .carousel-showmanymoveone .carousel-inner > .item.next {
+        -webkit-transform: translate3d(16.666%, 0, 0);
+        transform: translate3d(16.666%, 0, 0);
+        left: 0;
+    }
+    .carousel-showmanymoveone .carousel-inner > .item.active.left,
+    .carousel-showmanymoveone .carousel-inner > .item.prev {
+        -webkit-transform: translate3d(-16.666%, 0, 0);
+        transform: translate3d(-16.666%, 0, 0);
+        left: 0;
+    }
+    .carousel-showmanymoveone .carousel-inner > .item.left,
+    .carousel-showmanymoveone .carousel-inner > .item.prev.right,
+    .carousel-showmanymoveone .carousel-inner > .item.active {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+        left: 0;
+    }
+}
+
