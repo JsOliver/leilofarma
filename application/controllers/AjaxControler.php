@@ -1246,13 +1246,23 @@ if (! isset($accessToken)) {
 
 //$_SESSION['fb_access_token'] = (string) $accessToken;
 
+
+if(isset($_POST['email'])):
+
+    $email_acesso = $_POST['email'];
+
+    else:
+
+    $email_acesso = '';
+
+ endif;
     $token = (string) $accessToken;
-    $this->dadosfacebookrecupera($token);
+    $this->dadosfacebookrecupera($token,$email_acesso);
                 
     }
 
 
-public function dadosfacebookrecupera($token){
+public function dadosfacebookrecupera($token,$email){
 
 
     require_once 'application/core/api/facebook/Facebook/autoload.php';
@@ -1278,11 +1288,34 @@ try {
 $user = $response->getGraphUser();
 
 
+if(!empty($email) and !isset($user['email'])):
+
+
+if (!preg_match('/^[0-9a-z\_\.\-]+\@[0-9a-z\_\.\-]*[0-9a-z\_\-]+\.[a-z]{2,3}$/i', $email))
+
+{
+    $user['email'] = '';
+    echo 'Email Inválido';
+
+}else{
+ $user['email'] = $email;
+    
+}
+
+
+                  
+  
+  
+
+
+endif;
+
 if(isset($user['email'])):
 
 $this->db->select('firstname,email,pass,telefone');
 $this->db->from('users');
 $this->db->where('email',$user['email']);
+$this->db->or_where('fbid',$user['id']);
 $get = $this->db->get();
 if($get->num_rows() > 0):
 //Aqui o Email vindo do facebook já Existe então realiza Login
@@ -1314,7 +1347,7 @@ endif;
 
 else:
 
-echo 'Erro ao Obter E-mail do Facebook do Usuario, Tente Mais Tarde.';
+echo '0727';
 
 endif;
 

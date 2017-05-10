@@ -19,7 +19,7 @@ class UserController extends CI_Controller
     {
         $dados['metas'] = [
             "title" => "Leilomed, Medicamentos com os melhores preços",
-            "description" => "Encontre os melhoeres preços no leilo med",
+            "description" => "Encontre os melhores preços no LeiloFarma",
             "keywords" => "Medicamentos,leilão,leilão de medicamentos,google me ache"
         ];
         $dados['title'] = 'LeiloFarma';
@@ -184,7 +184,7 @@ class UserController extends CI_Controller
 
             $dados['metas'] = [
                 "title" => "Leilomed, Medicamentos com os melhores preços",
-                "description" => "Encontre os melhoeres preços no leilo med",
+                "description" => "Encontre os melhores preços no LeiloFarma",
                 "keywords" => "Medicamentos,leilão,leilão de medicamentos,google me ache"
             ];
             $dados['title'] = 'LeiloFarma';
@@ -206,7 +206,7 @@ class UserController extends CI_Controller
 
             $dados['metas'] = [
                 "title" => "Leilomed, Medicamentos com os melhores preços",
-                "description" => "Encontre os melhoeres preços no leilo med",
+                "description" => "Encontre os melhores preços no LeiloFarma",
                 "keywords" => "Medicamentos,leilão,leilão de medicamentos,google me ache"
             ];
             $dados['title'] = 'LeiloFarma';
@@ -229,7 +229,7 @@ class UserController extends CI_Controller
 
             $dados['metas'] = [
                 "title" => "Leilomed, Medicamentos com os melhores preços",
-                "description" => "Encontre os melhoeres preços no leilo med",
+                "description" => "Encontre os melhores preços no LeiloFarma",
                 "keywords" => "Medicamentos,leilão,leilão de medicamentos,google me ache"
             ];
             $dados['title'] = 'LeiloFarma';
@@ -252,7 +252,7 @@ class UserController extends CI_Controller
 
             $dados['metas'] = [
                 "title" => "Leilomed, Medicamentos com os melhores preços",
-                "description" => "Encontre os melhoeres preços no leilo med",
+                "description" => "Encontre os melhores preços no LeiloFarma",
                 "keywords" => "Medicamentos,leilão,leilão de medicamentos,google me ache"
             ];
             $dados['title'] = 'LeiloFarma';
@@ -276,7 +276,7 @@ class UserController extends CI_Controller
 
             $dados['metas'] = [
                 "title" => "Leilomed, Medicamentos com os melhores preços",
-                "description" => "Encontre os melhoeres preços no leilo med",
+                "description" => "Encontre os melhores preços no LeiloFarma",
                 "keywords" => "Medicamentos,leilão,leilão de medicamentos,google me ache"
             ];
             $dados['title'] = 'LeiloFarma';
@@ -300,7 +300,7 @@ class UserController extends CI_Controller
 
             $dados['metas'] = [
                 "title" => "Leilomed, Medicamentos com os melhores preços",
-                "description" => "Encontre os melhoeres preços no leilo med",
+                "description" => "Encontre os melhores preços no LeiloFarma",
                 "keywords" => "Medicamentos,leilão,leilão de medicamentos,google me ache"
             ];
             $dados['title'] = 'LeiloFarma';
@@ -326,7 +326,7 @@ class UserController extends CI_Controller
 
             $dados['metas'] = [
                 "title" => "Leilomed, Medicamentos com os melhores preços",
-                "description" => "Encontre os melhoeres preços no leilo med",
+                "description" => "Encontre os melhores preços no LeiloFarma",
                 "keywords" => "Medicamentos,leilão,leilão de medicamentos,google me ache"
             ];
             $dados['title'] = 'LeiloFarma';
@@ -349,7 +349,7 @@ class UserController extends CI_Controller
 
         $dados['metas'] = [
             "title" => "Leilomed, Medicamentos com os melhores preços",
-            "description" => "Encontre os melhoeres preços no leilo med",
+                "description" => "Encontre os melhores preços no LeiloFarma",
             "keywords" => "Medicamentos,leilão,leilão de medicamentos,google me ache"
         ];
         $dados['title'] = 'LeiloFarma';
@@ -453,7 +453,7 @@ class UserController extends CI_Controller
 
             $dados['metas'] = [
                 "title" => "Leilomed, Medicamentos com os melhores preços",
-                "description" => "Encontre os melhoeres preços no leilo med",
+                "description" => "Encontre os melhores preços no LeiloFarma",
                 "keywords" => "Medicamentos,leilão,leilão de medicamentos,google me ache"
             ];
             $dados['title'] = 'LeiloFarma';
