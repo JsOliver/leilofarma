@@ -23,7 +23,6 @@ logInWithFacebook = function() {
                         } else {
 
                             $("#errorData").html(data);
-                              window.location.reload();
 
 
                         }
@@ -38,7 +37,7 @@ logInWithFacebook = function() {
       } else {
         alert('User cancelled login or did not fully authorize.');
       }
-    });
+    },{scope: 'email'});
     return false;
   };
   window.fbAsyncInit = function() {
@@ -60,13 +59,7 @@ logInWithFacebook = function() {
 
 
 
-function loginfacebook(){
 
-
-
-
-                
-}
 </script>
 <br>
 <br>
@@ -81,6 +74,9 @@ function loginfacebook(){
         <!--Login-->
         <div class="col-lg-5 col-md-5 col-sm-5">
             <h4>Entrar na Minha Conta</h4>
+<h4 id="errorData"></h4>
+
+
 
             
 
@@ -111,7 +107,7 @@ function loginfacebook(){
             <h4 style="padding: 0 0 0 14.5%;">Cadastre-se</h4>
             <form method="post"  class="registr-form"
                   id="cadastro_form" novalidate="novalidate">
-                    <a href="javascript:loginfacebook();" style="color:white;text-decoration: none;background: #3c60ad;padding: 2%;float:left;width: 100%;text-align: center;font-size: 15pt;"><i class="fa fa-facebook-square"></i> Cadastre-se com o Facebook</a>
+                    <a href="javascript:logInWithFacebook();" style="color:white;text-decoration: none;background: #3c60ad;padding: 2%;float:left;width: 100%;text-align: center;font-size: 15pt;"><i class="fa fa-facebook-square"></i> Cadastre-se com o Facebook</a>
 <br><br><br>
                 <div class="form-group group">
                     <label for="rf-email">Nome Completo</label>

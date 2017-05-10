@@ -115,7 +115,11 @@ $result = $get->result_array();
                                     </label>
                                 </section>
                             </dd>
-                            <dt>Entre com sua senha Atual </dt>
+                            <?php 
+                            if($_SESSION['PASS'] <> 'fbonly'):
+                            ?>
+
+                            <dt>Entre com sua senha Atual</dt>
                             <dd>
                                 <section>
                                     <label for="senhaatlcog" class="input">
@@ -125,6 +129,7 @@ $result = $get->result_array();
                                     </label>
                                 </section>
                             </dd>
+                        <?php endif;?>
                             <dt>Sua Nova Senha</dt>
                             <dd>
                                 <section>

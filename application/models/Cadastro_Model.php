@@ -22,7 +22,7 @@ class Cadastro_Model extends CI_Model
         endif;
         if($tp == 2):
         $this->db->where('email', $email);
-        $this->db->where('fbid', $fbid);
+        $this->db->where('pass',$pass);
         endif;
         $get = $this->db->get();
         $count = $get->num_rows();
@@ -46,7 +46,7 @@ class Cadastro_Model extends CI_Model
     public function cadastro($type, $email, $pass, $idfacebook, $name,$telefone,$cpf)
     {
 
-        if ($type == 1):
+        if ($type == 1 or $type == 2):
 
             $this->db->from('users');
             $this->db->where('email', $email);
@@ -68,16 +68,23 @@ class Cadastro_Model extends CI_Model
                         return 'Email Inválido';
                     else:
 
-                        if(!preg_match('/^[0-9a-z]{6,25}$/i',$pass)):
+                        if(!preg_match('/^[0-9a-z]{6,25}$/i',$pass) and $type == 1):
                             return 'Senha Inválida';
                         else:
 
                             if(!empty($name)):
                                 $dados['firstname'] = $name;
                                 $dados['email'] = $email;
+                                if($type == 1):
                                 $dados['pass'] = hash('whirlpool',md5(sha1($pass)));
+                                else:
+                                $dados['pass'] = $pass;
+                                endif;
                                 $dados['telefone'] = $telefone;
                                 $dados['cpf'] = $cpf;
+                                if($type == 2):
+                                $dados['fbid'] = $idfacebook;
+                                endif;
                                 $dados['status'] = 1;
                                 $dados['verify'] = 0;
                                 $dados['type'] = 1;
@@ -85,7 +92,13 @@ class Cadastro_Model extends CI_Model
                                     $_SESSION['Auth01'] = true;
                                     $_SESSION['NAME'] = $name;
                                     $_SESSION['EMAIL'] = $email;
+                                    if($type == 2):
+                                    $_SESSION['PASS'] = $pass;
+
+                                        else:
                                     $_SESSION['PASS'] = hash('whirlpool',md5(sha1($pass)));
+
+                                    endif;
                                     $_SESSION['ID'] = $this->db->insert_id();
                                     $_SESSION['TEL'] = $telefone;
 

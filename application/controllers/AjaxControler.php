@@ -823,7 +823,59 @@ class AjaxControler extends CI_Controller
     {
         if ($this->SessionsVerify_Model->logver() == true):
 
-            if (!empty($_POST['email']) and !empty($_POST['senha']) and !empty($_POST['nsenha']) and !empty($_POST['rnsenha'])):
+
+            if($_SESSION['PASS'] == 'fbonly'):
+
+
+ if (!empty($_POST['email']) and !empty($_POST['nsenha']) and !empty($_POST['rnsenha'])):
+
+                if ($_SESSION['EMAIL'] == $_POST['email']):
+
+                    if ($_SESSION['PASS'] == 'fbonly'):
+
+                        if ($_POST['nsenha'] == $_POST['rnsenha']):
+
+                            $dado['pass'] = hash('whirlpool', md5(sha1($_POST['nsenha'])));
+                            $_SESSION['PASS'] = hash('whirlpool', md5(sha1($_POST['nsenha'])));
+                            $this->db->where('id', $_SESSION['ID']);
+                            if ($this->db->update('users', $dado)):
+
+                                echo '<b class="text-success">Dados Alterados com Sucesso.</b>';
+
+
+                            else:
+
+                                echo '<b class="text-danger">Erro ao Alterar Senhas.</b>';
+
+                            endif;
+
+                        else:
+
+                            echo '<b class="text-info">As Senhas não Coincidem.</b>';
+
+                        endif;
+
+
+                    else:
+                        echo '<b class="text-warning">Email atual Incorreta.</b>';
+
+
+                    endif;
+
+
+                else:
+                    echo '<b class="text-warning">Email incorreto.</b>';
+
+
+                endif;
+
+            else:
+                echo 'Nenhum Campo Pode Ficar em Branco';
+            endif;
+
+
+                else:
+ if (!empty($_POST['email']) and !empty($_POST['senha']) and !empty($_POST['nsenha']) and !empty($_POST['rnsenha'])):
 
                 if ($_SESSION['EMAIL'] == $_POST['email']):
 
@@ -868,6 +920,8 @@ class AjaxControler extends CI_Controller
             else:
                 echo 'Nenhum Campo Pode Ficar em Branco';
             endif;
+                    endif;
+           
 
         endif;
     }
@@ -1159,7 +1213,7 @@ class AjaxControler extends CI_Controller
     public function facebookloginapi(){
 
     
-    require_once '../core/api/facebook/Facebook/autoload.php';
+    require_once 'application/core/api/facebook/Facebook/autoload.php';
 
 $fb = new Facebook\Facebook([
   'app_id' => '1870186193247282',
@@ -1187,12 +1241,86 @@ if (! isset($accessToken)) {
 }
 
 // Logged in
-echo '<h3>Access Token</h3>';
-var_dump($accessToken->getValue());
+//echo '<h3>Access Token</h3>';
+//var_dump($accessToken->getValue());
 
-$_SESSION['fb_access_token'] = (string) $accessToken;
-            
+//$_SESSION['fb_access_token'] = (string) $accessToken;
+
+    $token = (string) $accessToken;
+    $this->dadosfacebookrecupera($token);
                 
     }
 
+
+public function dadosfacebookrecupera($token){
+
+
+    require_once 'application/core/api/facebook/Facebook/autoload.php';
+
+//$token = $_SESSION['fb_access_token'];
+$fb = new Facebook\Facebook([
+  'app_id' => '1870186193247282',
+  'app_secret' => '57f8277f7c2f9249165c840bef55d8de',
+  'default_graph_version' => 'v2.2',
+  ]);
+
+try {
+  // Returns a `Facebook\FacebookResponse` object
+  $response = $fb->get('/me?fields=id,name,email', $token);
+} catch(Facebook\Exceptions\FacebookResponseException $e) {
+  echo 'Graph returned an error: ' . $e->getMessage();
+  exit;
+} catch(Facebook\Exceptions\FacebookSDKException $e) {
+  echo 'Facebook SDK returned an error: ' . $e->getMessage();
+  exit;
+}
+
+$user = $response->getGraphUser();
+
+
+if(isset($user['email'])):
+
+$this->db->select('firstname,email,pass,telefone');
+$this->db->from('users');
+$this->db->where('email',$user['email']);
+$get = $this->db->get();
+if($get->num_rows() > 0):
+//Aqui o Email vindo do facebook já Existe então realiza Login
+
+  if($this->Cadastro_Model->login(2, $user['email'], $get->result_array()[0]['pass'], '') == 11):
+
+   echo 11;
+    else:
+
+        echo 'Erro ao Logar com o Usuario, tente Mais Tarde';
+
+    endif;    
+
+
+else:
+//Aqui o Email vindo do facebook não Existe então realiza Cadastro
+
+if($this->Cadastro_Model->cadastro(2, $user['email'], 'fbonly', $user['id'], $user['name'], '','') == 11):
+
+echo 11;
+
+    else:
+        echo 'Erro ao Cadastrar o Usuario, tente Mais Tarde';
+
+
+ endif;       
+
+endif;
+
+else:
+
+echo 'Erro ao Obter E-mail do Facebook do Usuario, Tente Mais Tarde.';
+
+endif;
+
+//echo 'Name: ' . $user['name'];
+// OR
+// echo 'Name: ' . $user->getName();
+
+}
 }
