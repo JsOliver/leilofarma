@@ -1403,7 +1403,13 @@ endif;
 public function requestadm(){
 if($this->SessionsVerify_Model->logVerAdmin() == true):
 
+
+    if(!isset($_POST['atual_pg'])):
+        $_POST['atual'] = 0; 
+    endif;
+
     if($_POST['method'] == 1):
+
 $this->load->view('admin/views/actions/tables',$_POST);
         endif;
 
@@ -1412,5 +1418,44 @@ $this->load->view('admin/views/actions/details',$_POST);
         endif;
 
 endif;
+}
+
+public function deleteadmitem(){
+
+if($this->SessionsVerify_Model->logVerAdmin() == true):
+
+    //Deletar usuarios
+    if($_POST['bancodedados'] == 'users'):
+    $this->db->where('id',$_POST['id']);
+    endif;
+
+    //Deletar lojas
+    if($_POST['bancodedados'] == 'lojas'):
+    $this->db->where('id_loja',$_POST['id']);
+    endif;
+
+ //Deletar medicamentos
+    if($_POST['bancodedados'] == 'medicamentos'):
+    $this->db->where('id',$_POST['id']);
+    endif;
+
+     //Deletar produtos disponiveis
+    if($_POST['bancodedados'] == 'produtos_disponiveis'):
+    $this->db->where('id_produto',$_POST['id']);
+    endif;
+
+    if($this->db->delete($_POST['bancodedados'])):
+
+echo 11;
+
+        else:
+echo 'Erro ao deletar dados, tente mais tarde.';
+
+            endif;
+
+
+
+endif;
+
 }
 }

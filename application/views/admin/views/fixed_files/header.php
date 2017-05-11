@@ -70,7 +70,9 @@ function action(action,method){
  $.ajax({
               url: '<?php echo base_url('AjaxControler/requestadm');?>',
               data: {action:action,method:method},
+
               type: 'POST',
+
                
                     error: function(data){
 
@@ -133,7 +135,7 @@ function action(action,method){
                 $this->db->from('adm_itens');
                 $this->db->where('tipo','1');
                 $this->db->where('acts','1');
-                $this->db->order_by('id','desc');
+                $this->db->order_by('id','asc');
                 $this->db->limit(20,0);
                 $get = $this->db->get();
 
