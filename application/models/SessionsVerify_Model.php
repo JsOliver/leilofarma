@@ -30,4 +30,21 @@ class SessionsVerify_Model extends CI_Model {
 
 
 
+public function logVerAdmin(){
+
+
+
+        if(isset($_SESSION['Auth02']) and isset($_SESSION['NAME_ADMIN']) and isset($_SESSION['PASS_ADMIN']) and isset($_SESSION['ID_ADMIN'])):
+
+            return true;
+        else:
+
+            return false;
+
+        endif;
+
+
+    }
+
+
 }

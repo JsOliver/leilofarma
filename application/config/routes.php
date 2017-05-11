@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+//Parte dos users Route
 
 $route['default_controller'] = 'UserController';
 $route['404_override'] = '';
@@ -35,3 +36,9 @@ $route['actionpedido'] = 'AjaxControler/actionpedido';
 $route['removelistaped'] = 'AjaxControler/removelistaped';
 $route['ajaxdeletestore'] = 'AjaxControler/ajaxdeletestore';
 $route['facebookloginapi'] = 'AjaxControler/facebookloginapi';
+
+
+
+//Parte do Admin Routes
+
+$route['admin'] = 'AdminControler/index';

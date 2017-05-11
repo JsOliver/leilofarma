@@ -1356,4 +1356,61 @@ endif;
 // echo 'Name: ' . $user->getName();
 
 }
+
+public function adminLogin(){
+
+if($this->SessionsVerify_Model->logVerAdmin() == false):
+
+
+if(isset($_POST['user']) and isset($_POST['pass'])):
+
+
+$this->db->from('admin');
+$this->db->where('name',$_POST['user']);
+$this->db->where('pass',hash('whirlpool',md5(sha1($_POST['pass']))));
+$get = $this->db->get();
+
+if($get->num_rows() > 0):
+
+    $result = $get->result_array();
+
+    $_SESSION['NAME_ADMIN'] = $_POST['user'];
+    $_SESSION['PASS_ADMIN'] = hash('whirlpool',md5(sha1($_POST['pass'])));
+    $_SESSION['ID_ADMIN'] = $result[0]['id_admin'];
+    $_SESSION['Auth02'] = 'true';
+
+    echo 11;
+
+    else:
+
+        echo 'Usuario ou senha incorretos.';
+
+endif;
+else:
+echo 'Dados de Entrada não recebidos';
+    endif;
+endif;
+}
+
+public function adminLogout(){
+if($this->SessionsVerify_Model->logVerAdmin() == true):
+
+        @session_destroy();
+        echo 11;
+endif;
+}
+
+public function requestadm(){
+if($this->SessionsVerify_Model->logVerAdmin() == true):
+
+    if($_POST['method'] == 1):
+$this->load->view('admin/views/actions/tables',$_POST);
+        endif;
+
+           if($_POST['method'] == 2):
+$this->load->view('admin/views/actions/details',$_POST);
+        endif;
+
+endif;
+}
 }
