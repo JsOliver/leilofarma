@@ -166,7 +166,13 @@ $this->load->view('admin/views/fixed_files/header');
 
 ?>
 
+<script>
+window.onload = function(){
+action('1','1');
+}
+</script>
 
+<h1>Carregando...</h1>
 
 
 

@@ -284,7 +284,25 @@ $i=0;
 
 <?php
                   
-     $this->db->from(''.$result[0]['database'].'');             
+     $this->db->from(''.$result[0]['database'].'');   
+     if($result[0]['database'] == 'users'):
+     $this->db->where('id',$idmodal);          
+      endif;
+
+           if($result[0]['database'] == 'medicamentos'):
+     $this->db->where('id',$idmodal);          
+      endif;
+
+   if($result[0]['database'] == 'produtos_disponiveis'):
+         $this->db->where('id_produto',$idmodal);          
+   endif;
+
+      if($result[0]['database'] == 'lojas'):
+    $this->db->where('id_loja',$idmodal);          
+      endif;
+   
+
+
      $get = $this->db->get();
      $resultcedit = $get->result_array();
 
@@ -441,11 +459,13 @@ $i++;
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
+
+    <?php
+
+
+    ?>
     <li><a href="#">1</a></li>
-    <li><a href="#">2</a></li>
-    <li><a href="#">3</a></li>
-    <li><a href="#">4</a></li>
-    <li><a href="#">5</a></li>
+
     <li>
       <a href="#" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>

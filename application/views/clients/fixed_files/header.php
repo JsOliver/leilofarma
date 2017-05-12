@@ -318,15 +318,25 @@ background: white;
         </ul>
 <br>
 <br>
-        <ul class="itens">
+        <ul class="itens" style="text-align: center;">
 
-            <li><a>home</a></li>
-            <li><a>home</a></li>
-            <li><a>home</a></li>
+            <li><a href="">Medicamentos</a></li>
+            <li><a href="">Genéricos</a></li>
+            <li><a href="">Dercosmeticos</a></li>
+              <li><a href="">Higiene</a></li>
+                <li><a href="">Perfumaria</a></li>
+                  <li><a href="">Nutrição</a></li>
+                    <li><a href="">Infantis</a></li>
+                      <li><a href="">Saúde Bucal</a></li>
 
         </ul>
 
     </div>
+
+    <form style="position: absolute;margin-top: 65px;padding: 0 2% 0 2%;width: 100%;"  method="get" action="http://127.0.0.1:8080/projects/leilofarma/busca">
+
+                <input style="width:100%;padding:1%;" type="text" name="q" placeholder="Pesquisar pelo nome, fatmacêutica,substancia" value="">
+            </form>
 
 </nav>
 
@@ -705,5 +715,5 @@ if ($page == 'profile' or $page == 'meus-lances' or $page == 'lojaa' or $page ==
 
         endif;
         ?>
-        <div style="display: none" id="fellinfo" class="alert alert-danger" role="alert">Erro</div>
+        <div style="display: none;" id="fellinfo" class="alert alert-danger" role="alert">Erro</div>
 
