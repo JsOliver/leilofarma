@@ -268,6 +268,7 @@ endif;
                     ?>
 </p>
 
+<div class="addthis_inline_share_toolbox"></div>
 
 </p>
             </div>
