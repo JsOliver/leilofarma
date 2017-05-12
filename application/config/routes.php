@@ -37,6 +37,8 @@ $route['removelistaped'] = 'AjaxControler/removelistaped';
 $route['ajaxdeletestore'] = 'AjaxControler/ajaxdeletestore';
 $route['facebookloginapi'] = 'AjaxControler/facebookloginapi';
 
+$route['termos-de-uso'] = 'ContentController/termos';
+
 
 
 //Parte do Admin Routes
