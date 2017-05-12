@@ -4,12 +4,14 @@ $this->db->select('nome,database');
 $this->db->from('adm_itens');
 $this->db->where('id',$action);
 $get = $this->db->get();
+$counttotal = $get->num_rows();
 $result = $get->result_array();
 
 $limit = 30;
 
 ?>
-
+<script src="<?php echo base_url('assets/tinymce/tinymce.min.js');?>"></script>
+  <script>tinymce.init({ selector:'textarea' });</script>
 <script>
 
 function buscar(database){
@@ -277,13 +279,85 @@ $i=0;
       <div class="modal-body">
         
 
+<form>
+ 
+
+<?php
+                  
+     $this->db->from(''.$result[0]['database'].'');             
+     $get = $this->db->get();
+     $resultcedit = $get->result_array();
 
 
+     foreach ($resultcedit[0] as $key => $value) {
+       
+if($key <> 'bio' and $key <> 'lastname'):    
+
+
+  if($key <> 'profile_image' and $key <> 'cover_image' and $key <> 'image_1' and $key <> 'image_2' and $key <> 'image_3' and $key <> 'image_4' and $key <> 'descricao_loja'):
+?>
+
+  <div class="form-group">
+    <label for="input<?php echo $key;?>"><?php if($key == 'firstname'): echo 'Nome';  else: echo str_replace('_',' ',ucwords($key)); endif;?></label>
+    <input type="email" class="form-control" id="input<?php echo $key;?>" placeholder="<?php echo ucwords($key);?>" <?php if($key == 'id' or $key == 'fbid' or $key == 'pass' or $key == 'verify' or $key == 'type' or $key == 'id_medicamento' or $key == 'visible'): echo 'disabled="disabled"'; endif;?> value="<?php echo $value;?>">
+  </div>
+  
+<?php  
+else:
+  if($key == 'profile_image'):
+  ?>
+
+ <div class="form-group">
+    <label for="profile_image">Alterar Imagem - <b><?php echo str_replace('_',' ',ucwords($key));?></b></label>
+    <input type="file" id="profile_image">
+  </div>
+<?php
+
+
+endif;
+if($key == 'cover_image'):
+?>
+
+ <div class="form-group">
+    <label for="cover_image">Alterar Imagem - <b><?php echo str_replace('_',' ',ucwords($key));?></b></label>
+    <input type="file" id="cover_image">
+  </div>
+<?php
+endif;
+
+if($key == 'descricao_loja'):
+?>
+    <label for="textarea">Descrição </label>
+
+<textarea id="textarea" name="<?php echo $key;?>">
+  <?php echo $value;?>
+</textarea>
+<?php
+endif;
+endif;
+
+?>
+<?php
+
+
+ endif; }?>
+
+
+ 
+  <div class="checkbox">
+    <label>
+      <input type="checkbox"> Ativo
+    </label>
+  </div>
+  <button type="submit" class="btn btn-default">Alterar</button>
+  <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+
+</form>
+
+    
+
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary">Salvar Alterações</button>
-      </div>
+     
     </div>
   </div>
 </div>
@@ -357,7 +431,29 @@ $i++;
                                   
                                    
                                 </tbody>
+
                             </table>
+                     
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li>
+      <a href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li>
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
                         </div>
                     </div>
                    
