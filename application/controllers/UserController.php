@@ -41,6 +41,8 @@ class UserController extends CI_Controller
 
         endif;
 
+
+$key = trim($key);
         if (!isset($_GET['c'])):
 
             if (strripos($this->uri->segment(2), '?') == true):
