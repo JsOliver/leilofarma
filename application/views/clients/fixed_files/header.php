@@ -320,14 +320,14 @@ background: white;
 <br>
         <ul class="itens" style="text-align: center;">
 
-            <li><a href="">Medicamentos</a></li>
-            <li><a href="">Genéricos</a></li>
-            <li><a href="">Dercosmeticos</a></li>
-              <li><a href="">Higiene</a></li>
-                <li><a href="">Perfumaria</a></li>
-                  <li><a href="">Nutrição</a></li>
-                    <li><a href="">Infantis</a></li>
-                      <li><a href="">Saúde Bucal</a></li>
+            <li><a href="<?php echo base_url('medicamentos');?>">Medicamentos</a></li>
+            <li><a href="<?php echo base_url('generico');?>">Genéricos</a></li>
+            <li><a href="<?php echo base_url('dermocosmeticos');?>">Dercosmeticos</a></li>
+              <li><a href="<?php echo base_url('higiene');?>">Higiene</a></li>
+                <li><a href="<?php echo base_url('perfumaria');?>">Perfumaria</a></li>
+                  <li><a href="<?php echo base_url('nutricao');?>">Nutrição</a></li>
+                    <li><a href="<?php echo base_url('infantis');?>">Infantis</a></li>
+                      <li><a href="<?php echo base_url('saude');?>">Saúde Bucal</a></li>
 
         </ul>
 

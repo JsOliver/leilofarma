@@ -140,7 +140,7 @@ if ($page == 'lojaa'):
           var file = 'xmlFileUpload';
           form = new FormData();
           form.append(file, event.target.files[0]);
-          $("#errorDataXml").html('Carregando...');
+          $("#errorDataXml").html('Xml Sendo Carregado, Este processo pode Demorar Varios Minutos...');
 
           $.ajax({
               url: '<?php echo base_url('AjaxControler/uploadXML');?>',

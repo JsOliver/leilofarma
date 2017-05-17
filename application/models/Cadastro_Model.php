@@ -88,6 +88,8 @@ class Cadastro_Model extends CI_Model
                                 $dados['status'] = 1;
                                 $dados['verify'] = 0;
                                 $dados['type'] = 1;
+
+
                                 if($this->db->insert('users',$dados)):
                                     $_SESSION['Auth01'] = true;
                                     $_SESSION['NAME'] = $name;
@@ -106,6 +108,9 @@ class Cadastro_Model extends CI_Model
                                     else:
                                     return 0;
                                     endif;
+
+
+
                                 else:
                                 return 0;
                                 endif;

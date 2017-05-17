@@ -33,6 +33,10 @@ $(document).ready(function(){
 
                         $("#errorcad").html(data);
                     }
+                },
+                error: function (data) {
+
+                    alert(data);
                 }
             });
 

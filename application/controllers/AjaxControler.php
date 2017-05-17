@@ -150,10 +150,10 @@ class AjaxControler extends CI_Controller
             if (isset($_POST['nome']) and isset($_POST['emailcad']) and isset($_POST['passcad']) and isset($_POST['telefone']) and isset($_POST['cpf'])):
 
 
-                if ($this->Cadastro_Model->cadastro(1, $_POST['emailcad'], $_POST['passcad'], '', $_POST['nome'], $_POST['telefone'],$_POST['cpf']) == 11):
+                if ($this->Cadastro_Model->cadastro(1, $_POST['emailcad'], $_POST['passcad'], '', $_POST['nome'], $_POST['telefone'], $_POST['cpf']) == 11):
                     echo 11;
                 else:
-                    echo $this->Cadastro_Model->cadastro(1, $_POST['emailcad'], $_POST['passcad'], '', $_POST['nome'], $_POST['telefone'],$_POST['cpf']);
+                    echo $this->Cadastro_Model->cadastro(1, $_POST['emailcad'], $_POST['passcad'], '', $_POST['nome'], $_POST['telefone'], $_POST['cpf']);
 
                 endif;
             endif;
@@ -252,208 +252,244 @@ class AjaxControler extends CI_Controller
 
     }
 
-    public function ajaxupdadopd($tipo, $idxml,$file)
+    public function ajaxupdadopd($tipo, $idxml, $file)
     {
-         if (isset($tipo)):
+        if (isset($tipo)):
+            /*
+                        if ($tipo == 1):
 
-            if ($tipo == 1):
+                            $this->db->from('xmlfiles');
+                            $this->db->where('id', $idxml);
+                            $get = $this->db->get();
+                            $count = $get->num_rows();
 
-                $this->db->from('xmlfiles');
-                $this->db->where('id', $idxml);
-                $get = $this->db->get();
-                $count = $get->num_rows();
+                            if ($count > 0):
 
-                if ($count > 0):
+                                $result = $get->result_array();
 
-                    $result = $get->result_array();
-
-                    $dado = simplexml_load_string($result[0]['xmlFile']);
-                else:
+                                $dado = simplexml_load_string($result[0]['xmlFile']);
+                            else:
 
 
-                    $filex = $file['tmp_name'];
-                    $dado = file_get_contents(addslashes($filex));
-                    $dado = simplexml_load_string($dado);
+                                $filex = $file['tmp_name'];
+                                $dado = file_get_contents(addslashes(trim($filex)));
+                                $dado = simplexml_load_string($dado);
 
+                            endif;
+
+
+            */
+
+            $filex = $file['tmp_name'];
+            $dado = file_get_contents(addslashes($filex));
+            $dado = simplexml_load_string($dado);
+
+
+            foreach ($dado as $dds) {
+
+
+                if (isset($dds->oferta_id)): $oferta_id = $dds->oferta_id;
+                else: $oferta_id = ''; endif;
+                if (isset($dds->oferta_descricao)): $nome = $dds->oferta_descricao;
+                else: $nome = ''; endif;
+                if (isset($dds->formula)): $formula = $dds->formula;
+                else: $formula = ''; endif;
+                if (isset($dds->substancia)): $substancia = $dds->substancia;
+                else: $substancia = ''; endif;
+                if (isset($dds->oferta_valor)): $preco = $dds->oferta_valor;
+                else: $preco = ''; endif;
+                if (isset($dds->oferta_link)): $link_produto = $dds->oferta_link;
+                else: $link_produto = ''; endif;
+                if (isset($dds->desconto)): $desconto = $dds->desconto;
+                else: $desconto = ''; endif;
+                if (isset($dds->categoria1)): $categoria1 = $dds->categoria1;
+                else: $categoria1 = ''; endif;
+                if (isset($dds->categoria2)): $categoria2 = $dds->categoria2;
+                else: $categoria2 = ''; endif;
+                if (isset($dds->oferta_fabricante)): $laboratorio = $dds->oferta_fabricante;
+                else: $laboratorio = ''; endif;
+                if (isset($dds->unidades)): $unidades = $dds->unidades;
+                else: $unidades = ''; endif;
+                if (isset($dds->oferta_principio_ativo)): $fixacal = $dds->oferta_principio_ativo;
+                else: $fixacal = ''; endif;
+                if (isset($dds->oferta_codigo_barra)): $codigobarra = $dds->oferta_codigo_barra;
+                else: $codigobarra = ''; endif;
+                if (isset($dds->opcional->miligramas)): $miligramas = $dds->opcional->miligramas;
+                else: $miligramas = ''; endif;
+                if (isset($dds->opcional->indicacoes)): $indicacoes = $dds->opcional->indicacoes;
+                else: $indicacoes = ''; endif;
+                if (isset($dds->oferta_img)): $imagem1 = $dds->oferta_img;
+                else: $imagem1 = ''; endif;
+                if (isset($dds->imagem2)): $imagem2 = $dds->imagem2;
+                else: $imagem2 = ''; endif;
+                if (isset($dds->imagem3)): $imagem3 = $dds->imagem3;
+                else: $imagem3 = ''; endif;
+                if (isset($dds->imagem4)): $imagem4 = $dds->imagem4;
+                else: $imagem4 = ''; endif;
+                if (isset($dds->opcional->contraIndicacoes)): $contra_indicacoes = $dds->opcional->contraIndicacoes;
+                else: echo $contra_indicacoes = ''; endif;
+                if (isset($dds->opcional->posologia)): $posologia = $dds->opcional->posologia;
+                else: $posologia = ''; endif;
+                if (isset($dds->opcional->CaracteristicasFarmacologicas)): $CaracteristicasFarmacologicas = $dds->opcional->CaracteristicasFarmacologicas;
+                else: $CaracteristicasFarmacologicas = ''; endif;
+                if (isset($dds->opcional->armazenagem)): $armazenagem = $dds->opcional->armazenagem;
+                else: $armazenagem = ''; endif;
+                echo $armazenagem;
+
+                $keyword = str_replace(' ', ',', $nome) . ',' . str_replace(' ', ',', $laboratorio) . ',' . str_replace(' ', ',', $formula) . ',' . str_replace(' ', ',', $substancia) . ',' . $nome . ',' . $formula . ',' . $substancia . ',' . $laboratorio;
+
+                echo $keyword . '<br><br>';
+
+
+                if (!empty($imagem1)):
+                    $date['image_1'] = @trim(file_get_contents(addslashes($imagem1)));
                 endif;
 
 
-                    foreach ($dado as $dds) {
+                /*
+                                                               if(!empty($imagem2)):
+                                                                   $date['image_2'] = trim(file_get_contents(addslashes($imagem2)));
+                                                               endif;
+
+                                                               if(!empty($imagem3)):
+                                                                   $date['image_3'] = trim(file_get_contents(addslashes($imagem3)));
+                                                               endif;
+
+                                                               if(!empty($imagem4)):
+                                                                   $date['image_4'] = trim(file_get_contents(addslashes($imagem4)));
+                                                               endif;
+                */
+
+                $this->db->from('medicamentos');
+                $this->db->where('id_medicamento', $oferta_id);
+                $this->db->where('add_by', $_SESSION['ID']);
+                $getctm = $this->db->get();
+                $countctm = $getctm->num_rows();
+                if ($countctm == 0):
+                    if (!empty($imagem1)):
+                        $dada['image_1'] = @trim(file_get_contents(addslashes($imagem1)));
+                    endif;
+
+                    if (!empty($imagem2)):
+                        $dada['image_2'] = trim(file_get_contents(addslashes($imagem2)));
+                    endif;
+                    $dada['keywords'] = trim($keyword);
+                    $dada['marca'] = trim($laboratorio);
+                    $dada['nome'] = trim($nome);
+                    $dada['substancia'] = trim($substancia);
+                    $dada['tipo'] = 1;
+                    $dada['add_by'] = trim($_SESSION['ID']);
+                    $dada['miligramas'] = trim($miligramas);
+                    $dada['fixa_cal'] = trim($fixacal);
+                    $dada['id_medicamento'] = trim($oferta_id);
+                    $dada['indicacoes'] = trim($indicacoes);
+                    $dada['contra_indicacoes'] = trim($contra_indicacoes);
+                    $dada['posologia'] = trim($posologia);
+                    $dada['caracteristicas_farmacologicas'] = trim($CaracteristicasFarmacologicas);
+                    $dada['armazenagem'] = trim($armazenagem);
+                    $dada['data_add'] = date('YmdHis');
+                    $dada['pesquisas'] = '0';
+                    $dada['cliques'] = '0';
+                    $dada['data_add'] = date('YmdHis');
 
 
+                    if ($this->db->insert('medicamentos', $dada)):
+                        $insertp = $this->db->insert_id();
 
-                            if(isset($dds->oferta_id)):  $oferta_id = $dds->oferta_id; else:  $oferta_id = ''; endif;
-                            if(isset($dds->oferta_descricao)):  $nome = $dds->oferta_descricao; else:  $nome = ''; endif;
-                            if(isset($dds->formula)):  $formula = $dds->formula; else:  $formula = ''; endif;
-                            if(isset($dds->substancia)):  $substancia = $dds->substancia; else:  $substancia = ''; endif;
-                            if(isset($dds->oferta_valor)):  $preco = $dds->oferta_valor; else:  $preco = ''; endif;
-                            if(isset($dds->oferta_link)):  $link_produto = $dds->oferta_link; else:  $link_produto = ''; endif;
-                            if(isset($dds->desconto)):  $desconto = $dds->desconto; else:  $desconto = ''; endif;
-                            if(isset($dds->categoria1)):  $categoria1 = $dds->categoria1; else:  $categoria1 = ''; endif;
-                            if(isset($dds->categoria2)):  $categoria2 = $dds->categoria2; else:  $categoria2 = ''; endif;
-                            if(isset($dds->oferta_fabricante)):  $laboratorio = $dds->oferta_fabricante; else:  $laboratorio = ''; endif;
-                            if(isset($dds->unidades)):  $unidades = $dds->unidades; else:  $unidades = ''; endif;
-                            if(isset($dds->oferta_principio_ativo)):  $fixacal = $dds->oferta_principio_ativo; else:  $fixacal = ''; endif;
-                            if(isset($dds->oferta_codigo_barra)):  $codigobarra = $dds->oferta_codigo_barra; else:  $codigobarra = ''; endif;
-                            if(isset($dds->opcional->miligramas)):  $miligramas = $dds->opcional->miligramas; else:  $miligramas = ''; endif;
-                            if(isset($dds->opcional->indicacoes)):  $indicacoes = $dds->opcional->indicacoes; else:  $indicacoes = ''; endif;
-                            if(isset($dds->oferta_img)):  $imagem1 = $dds->oferta_img; else:  $imagem1 = ''; endif;
-                            if(isset($dds->imagem2)):  $imagem2 = $dds->imagem2; else:  $imagem2 = ''; endif;
-                            if(isset($dds->imagem3)):  $imagem3 = $dds->imagem3; else:  $imagem3 = ''; endif;
-                            if(isset($dds->imagem4)):  $imagem4 = $dds->imagem4; else:  $imagem4 = ''; endif;
-                            if(isset($dds->opcional->contraIndicacoes)):  $contra_indicacoes = $dds->opcional->contraIndicacoes; else: echo $contra_indicacoes = ''; endif;
-                            if(isset($dds->opcional->posologia)):  $posologia = $dds->opcional->posologia; else:  $posologia = ''; endif;
-                            if(isset($dds->opcional->CaracteristicasFarmacologicas)):  $CaracteristicasFarmacologicas = $dds->opcional->CaracteristicasFarmacologicas; else:  $CaracteristicasFarmacologicas = ''; endif;
-                            if(isset($dds->opcional->armazenagem)):  $armazenagem = $dds->opcional->armazenagem; else:  $armazenagem = ''; endif;
-                            echo $armazenagem;
+                        $this->db->from('users');
+                        $this->db->where('id', $_SESSION['ID']);
+                        $get = $this->db->get();
+                        $count = $get->num_rows();
+                        if ($count > 0):
 
-                            $keyword = str_replace(' ', ',', $nome) . ',' . str_replace(' ', ',', $laboratorio) . ',' . str_replace(' ', ',', $formula) . ',' . str_replace(' ', ',', $substancia) . ',' . $nome . ',' . $formula . ',' . $substancia . ',' . $laboratorio;
+                            $result = $get->result_array();
 
+                            $dados['keywords'] = trim($keyword);
+                            $dados['id_produto'] = trim($insertp);
+                            $dados['nome_prod'] = trim($nome);
+                            $dados['link_produto'] = trim($link_produto);
+                            $dados['cod_produto'] = trim('#MD0' . $insertp);
+                            $dados['preco'] = trim($preco);
+                            $dados['desconto'] = trim($desconto);
+                            $dados['id_loja'] = trim($result[0]['loja']);
+                            $dados['visible'] = '1';
+                            $dados['unidades'] = trim($unidades);
+                            $dados['data_adicionado'] = date('YmdHis');
 
-
-
-                        if(!empty($imagem1)):
-                            $date['image_1'] = @file_get_contents(addslashes($imagem1));
-                        endif;
-
-                        if(!empty($imagem2)):
-                            $date['image_2'] = file_get_contents(addslashes($imagem2));
-                        endif;
-
-                        if(!empty($imagem3)):
-                            $date['image_3'] = file_get_contents(addslashes($imagem3));
-                        endif;
-
-                        if(!empty($imagem4)):
-                            $date['image_4'] = file_get_contents(addslashes($imagem4));
-                        endif;
-
-                        $this->db->from('medicamentos');
-                        $this->db->where('id_medicamento',$oferta_id);
-                        $this->db->where('add_by',$_SESSION['ID']);
-                        $getctm = $this->db->get();
-                        $countctm = $getctm->num_rows();
-                        if($countctm == 0):
-                            if(!empty($imagem1)):
-                                $dada['image_1'] = @file_get_contents(addslashes($imagem1));
+                            if (!empty($imagem1)):
+                                $dados['image_1'] = @trim(file_get_contents(addslashes($imagem1)));
                             endif;
 
-                            if(!empty($imagem2)):
-                                $dada['image_2'] = file_get_contents(addslashes($imagem2));
+                            if (!empty($imagem2)):
+                                $dados['image_2'] = trim(file_get_contents(addslashes($imagem2)));
                             endif;
-                            $dada['keywords'] = $keyword;
-                            $dada['marca'] = $laboratorio;
-                            $dada['nome'] = $nome;
-                            $dada['substancia'] = $substancia;
-                            $dada['tipo'] = 1;
-                            $dada['add_by'] = $_SESSION['ID'];
-                            $dada['miligramas'] = $miligramas;
-                            $dada['fixa_cal'] = $fixacal;
-                            $dada['id_medicamento'] = $oferta_id;
-                            $dada['indicacoes'] = $indicacoes;
-                            $dada['contra_indicacoes'] = $contra_indicacoes;
-                            $dada['posologia'] = $posologia;
-                            $dada['caracteristicas_farmacologicas'] = $CaracteristicasFarmacologicas;
-                            $dada['armazenagem'] = $armazenagem;
-                            $dada['data_add'] = date('YmdHis');
-                            $dada['pesquisas'] = '0';
-                            $dada['cliques'] = '0';
-                            $dada['data_add'] = date('YmdHis');
 
+                            /*if(!empty($categoria1)):
+                            $this->db->from('categorias');
+                            $this->db->like('nome', $categoria1);
+                            $this->db->or_like('nome', $categoria2);
+                            $get = $this->db->get();
+                            $count = $get->num_rows();
+                            if($count > 0):
 
-                            if($this->db->insert('medicamentos',$dada)):
-                                $insertp =  $this->db->insert_id();
+                                $result = $get->result_array();
+                                $categorias = '';
+                                foreach ($result as $dda) {
 
-                                $this->db->from('users');
-                                $this->db->where('id', $_SESSION['ID']);
-                                $get = $this->db->get();
-                                $count = $get->num_rows();
-                                if($count > 0):
+                                    $categorias .= $dda['id'] . ',';
 
-                                    $result = $get->result_array();
+                                }
 
-                                    $dados['keywords'] = $keyword;
-                                    $dados['id_produto'] = $insertp;
-                                    $dados['nome_prod'] = $nome;
-                                    $dados['link_produto'] = $link_produto;
-                                    $dados['cod_produto'] = '#MD0' . $insertp;
-                                    $dados['preco'] = $preco;
-                                    $dados['desconto'] = $desconto;
-                                    $dados['id_loja'] = $result[0]['loja'];
-                                    $dados['visible'] = '1';
-                                    $dados['unidades'] = $unidades;
-                                    $dados['data_adicionado'] = date('YmdHis');
-
-                                    if(!empty($imagem1)):
-                                        $dados['image_1'] = @file_get_contents(addslashes($imagem1));
-                                    endif;
-
-                                    if(!empty($imagem2)):
-                                        $dados['image_2'] = file_get_contents(addslashes($imagem2));
-                                    endif;
-
-                                    /*if(!empty($categoria1)):
-                                    $this->db->from('categorias');
-                                    $this->db->like('nome', $categoria1);
-                                    $this->db->or_like('nome', $categoria2);
-                                    $get = $this->db->get();
-                                    $count = $get->num_rows();
-                                    if($count > 0):
-
-                                        $result = $get->result_array();
-                                        $categorias = '';
-                                        foreach ($result as $dda) {
-
-                                            $categorias .= $dda['id'] . ',';
-
-                                        }
-
-                                        $dados['categorias'] = $categorias;
-                                                                            endif;
+                                $dados['categorias'] = $categorias;
+                                                                    endif;
 
 */
-                                    if ($this->db->insert('produtos_disponiveis',$dados)):
+                            if ($this->db->insert('produtos_disponiveis', $dados)):
 
-                                        echo 11;
-                                    else:
-                                        echo 11;
-                                    endif;
-
-
-                                endif;
+                                echo 11;
                             else:
                                 echo 11;
                             endif;
 
-                        else:
-                            echo 11;
 
                         endif;
+                    else:
+                        echo 11;
+                    endif;
+
+                else:
+                    echo 11;
+
+                endif;
+
+                sleep(3);
+            }
+
+            /*
+                        else:
+
+                            echo '11';
+                        endif;
+                    else:
+
+                        echo '0';
+                    endif;
+            */
 
 
-                    }
-
-
-            else:
-
-                echo '11';
-            endif;
-        else:
-
-            echo '0';
         endif;
     }
 
     public function uploadXML()
     {
-      /*  $allowed = 'xml';
-        $upload = $this->Functions_Model->uploadimage('xml', $_SESSION['ID'], 'xmlFile', 'xmlfiles', $_FILES['xmlFileUpload'], $allowed, 200, $_SESSION['ID']);
-        if ($upload > 0):
-            echo $this->ajaxupdadopd(1, $upload);
-        else:
-            echo 'Erro ao Enviar Dados';
-        endif;*/
-		        echo $this->ajaxupdadopd(1, 0,$_FILES['xmlFileUpload']);
+        /*  $allowed = 'xml';
+          $upload = $this->Functions_Model->uploadimage('xml', $_SESSION['ID'], 'xmlFile', 'xmlfiles', $_FILES['xmlFileUpload'], $allowed, 200, $_SESSION['ID']);
+          if ($upload > 0):
+              echo $this->ajaxupdadopd(1, $upload);
+          else:
+              echo 'Erro ao Enviar Dados';
+          endif;*/
+        echo $this->ajaxupdadopd(1, 0, $_FILES['xmlFileUpload']);
 
     }
 
@@ -461,29 +497,23 @@ class AjaxControler extends CI_Controller
     {
 
 
-
-            if (isset($_SESSION['card']) and !empty($_SESSION['card'])):
-
+        if (isset($_SESSION['card']) and !empty($_SESSION['card'])):
 
 
-                $_SESSION['card'][$_POST['produto']] =  array(["produto" => $_POST['produto'],"lance" => $_POST['valor'],"quantidade" => $_POST['quantidade'] ]) + $_SESSION['card'];
+            $_SESSION['card'][$_POST['produto']] = array(["produto" => $_POST['produto'], "lance" => $_POST['valor'], "quantidade" => $_POST['quantidade']]) + $_SESSION['card'];
 
 
-            else:
+        else:
 
-                $_SESSION['card'][$_POST['produto']] =  array(["produto" => $_POST['produto'],"lance" => $_POST['valor'],"quantidade" => $_POST['quantidade'] ]) ;
-
-
-            endif;
+            $_SESSION['card'][$_POST['produto']] = array(["produto" => $_POST['produto'], "lance" => $_POST['valor'], "quantidade" => $_POST['quantidade']]);
 
 
-
-
-
+        endif;
 
 
     }
-       public function lance()
+
+    public function lance()
     {
 
         if ($this->SessionsVerify_Model->logver() == true):
@@ -528,7 +558,7 @@ class AjaxControler extends CI_Controller
         elseif ($this->SessionsVerify_Model->logver() == false):
 
 
-            if(!empty($_POST['nome']) and !empty($_POST['email']) and !empty($_POST['telefone'])):
+            if (!empty($_POST['nome']) and !empty($_POST['email']) and !empty($_POST['telefone'])):
                 $this->db->from('produtos_disponiveis');
                 $this->db->where('id_pdp', $_POST['produto']);
                 $get = $this->db->get();
@@ -566,9 +596,9 @@ class AjaxControler extends CI_Controller
                 echo 11;
 
 
-                else:
+            else:
 
-                    echo 'Prencha Todas as Informações de Contato ';
+                echo 'Prencha Todas as Informações de Contato ';
 
 
             endif;
@@ -588,27 +618,27 @@ class AjaxControler extends CI_Controller
             $get = $this->db->get();
             $count = $get->num_rows();
             if ($count > 0):
-            $result = $get->result_array();
+                $result = $get->result_array();
 
-            $this->db->where('id_loja',$result[0]['loja']);
-            $this->db->delete('lojas');
+                $this->db->where('id_loja', $result[0]['loja']);
+                $this->db->delete('lojas');
 
 
-            $this->db->where('id_loja',$result[0]['loja']);
-            $this->db->delete('produtos_disponiveis');
+                $this->db->where('id_loja', $result[0]['loja']);
+                $this->db->delete('produtos_disponiveis');
 
-                $this->db->where('id_loja',$result[0]['loja']);
-            $this->db->delete('produtos_disponiveis');
+                $this->db->where('id_loja', $result[0]['loja']);
+                $this->db->delete('produtos_disponiveis');
 
-                $this->db->where('id_loja',$result[0]['loja']);
-            $this->db->delete('lances');
+                $this->db->where('id_loja', $result[0]['loja']);
+                $this->db->delete('lances');
                 $ddsa['loja'] = '0';
-                $this->db->where('id',$_SESSION['ID']);
-                $this->db->update('users',$ddsa);
+                $this->db->where('id', $_SESSION['ID']);
+                $this->db->update('users', $ddsa);
 
-            echo 11;
-                endif;
-                endif;
+                echo 11;
+            endif;
+        endif;
     }
 
     public function exibir()
@@ -824,104 +854,104 @@ class AjaxControler extends CI_Controller
         if ($this->SessionsVerify_Model->logver() == true):
 
 
-            if($_SESSION['PASS'] == 'fbonly'):
+            if ($_SESSION['PASS'] == 'fbonly'):
 
 
- if (!empty($_POST['email']) and !empty($_POST['nsenha']) and !empty($_POST['rnsenha'])):
+                if (!empty($_POST['email']) and !empty($_POST['nsenha']) and !empty($_POST['rnsenha'])):
 
-                if ($_SESSION['EMAIL'] == $_POST['email']):
+                    if ($_SESSION['EMAIL'] == $_POST['email']):
 
-                    if ($_SESSION['PASS'] == 'fbonly'):
+                        if ($_SESSION['PASS'] == 'fbonly'):
 
-                        if ($_POST['nsenha'] == $_POST['rnsenha']):
+                            if ($_POST['nsenha'] == $_POST['rnsenha']):
 
-                            $dado['pass'] = hash('whirlpool', md5(sha1($_POST['nsenha'])));
-                            $_SESSION['PASS'] = hash('whirlpool', md5(sha1($_POST['nsenha'])));
-                            $this->db->where('id', $_SESSION['ID']);
-                            if ($this->db->update('users', $dado)):
+                                $dado['pass'] = hash('whirlpool', md5(sha1($_POST['nsenha'])));
+                                $_SESSION['PASS'] = hash('whirlpool', md5(sha1($_POST['nsenha'])));
+                                $this->db->where('id', $_SESSION['ID']);
+                                if ($this->db->update('users', $dado)):
 
-                                echo '<b class="text-success">Dados Alterados com Sucesso.</b>';
+                                    echo '<b class="text-success">Dados Alterados com Sucesso.</b>';
 
+
+                                else:
+
+                                    echo '<b class="text-danger">Erro ao Alterar Senhas.</b>';
+
+                                endif;
 
                             else:
 
-                                echo '<b class="text-danger">Erro ao Alterar Senhas.</b>';
+                                echo '<b class="text-info">As Senhas não Coincidem.</b>';
 
                             endif;
 
-                        else:
 
-                            echo '<b class="text-info">As Senhas não Coincidem.</b>';
+                        else:
+                            echo '<b class="text-warning">Email atual Incorreta.</b>';
+
 
                         endif;
 
 
                     else:
-                        echo '<b class="text-warning">Email atual Incorreta.</b>';
+                        echo '<b class="text-warning">Email incorreto.</b>';
 
 
                     endif;
 
-
                 else:
-                    echo '<b class="text-warning">Email incorreto.</b>';
-
-
+                    echo 'Nenhum Campo Pode Ficar em Branco';
                 endif;
 
+
             else:
-                echo 'Nenhum Campo Pode Ficar em Branco';
-            endif;
+                if (!empty($_POST['email']) and !empty($_POST['senha']) and !empty($_POST['nsenha']) and !empty($_POST['rnsenha'])):
+
+                    if ($_SESSION['EMAIL'] == $_POST['email']):
+
+                        if (hash('whirlpool', md5(sha1($_POST['senha']))) == $_SESSION['PASS']):
+
+                            if ($_POST['nsenha'] == $_POST['rnsenha']):
+
+                                $dado['pass'] = hash('whirlpool', md5(sha1($_POST['nsenha'])));
+                                $_SESSION['PASS'] = hash('whirlpool', md5(sha1($_POST['nsenha'])));
+                                $this->db->where('id', $_SESSION['ID']);
+                                if ($this->db->update('users', $dado)):
+
+                                    echo '<b class="text-success">Dados Alterados com Sucesso.</b>';
 
 
-                else:
- if (!empty($_POST['email']) and !empty($_POST['senha']) and !empty($_POST['nsenha']) and !empty($_POST['rnsenha'])):
+                                else:
 
-                if ($_SESSION['EMAIL'] == $_POST['email']):
+                                    echo '<b class="text-danger">Erro ao Alterar Senhas.</b>';
 
-                    if (hash('whirlpool', md5(sha1($_POST['senha']))) == $_SESSION['PASS']):
-
-                        if ($_POST['nsenha'] == $_POST['rnsenha']):
-
-                            $dado['pass'] = hash('whirlpool', md5(sha1($_POST['nsenha'])));
-                            $_SESSION['PASS'] = hash('whirlpool', md5(sha1($_POST['nsenha'])));
-                            $this->db->where('id', $_SESSION['ID']);
-                            if ($this->db->update('users', $dado)):
-
-                                echo '<b class="text-success">Dados Alterados com Sucesso.</b>';
-
+                                endif;
 
                             else:
 
-                                echo '<b class="text-danger">Erro ao Alterar Senhas.</b>';
+                                echo '<b class="text-info">As Senhas não Coincidem.</b>';
 
                             endif;
 
-                        else:
 
-                            echo '<b class="text-info">As Senhas não Coincidem.</b>';
+                        else:
+                            echo '<b class="text-warning">Email atual Incorreta.</b>';
+
 
                         endif;
 
 
                     else:
-                        echo '<b class="text-warning">Email atual Incorreta.</b>';
+                        echo '<b class="text-warning">Email incorreto.</b>';
 
 
                     endif;
-
 
                 else:
-                    echo '<b class="text-warning">Email incorreto.</b>';
-
-
+                    echo 'Nenhum Campo Pode Ficar em Branco';
                 endif;
-
-            else:
-                echo 'Nenhum Campo Pode Ficar em Branco';
             endif;
-                    endif;
-           
+
 
         endif;
     }
@@ -1210,35 +1240,36 @@ class AjaxControler extends CI_Controller
     }
 
 
-    public function facebookloginapi(){
+    public function facebookloginapi()
+    {
 
-    
-    require_once 'application/core/api/facebook/Facebook/autoload.php';
 
-$fb = new Facebook\Facebook([
-  'app_id' => '1870186193247282',
-  'app_secret' => '57f8277f7c2f9249165c840bef55d8de',
-  'default_graph_version' => 'v2.2',
-  ]);
+        require_once 'application/core/api/facebook/Facebook/autoload.php';
 
-$helper = $fb->getJavaScriptHelper();
+        $fb = new Facebook\Facebook([
+            'app_id' => '1870186193247282',
+            'app_secret' => '57f8277f7c2f9249165c840bef55d8de',
+            'default_graph_version' => 'v2.2',
+        ]);
 
-try {
-  $accessToken = $helper->getAccessToken();
-} catch(Facebook\Exceptions\FacebookResponseException $e) {
-  // When Graph returns an error
-  echo 'Graph returned an error: ' . $e->getMessage();
-  exit;
-} catch(Facebook\Exceptions\FacebookSDKException $e) {
-  // When validation fails or other local issues
-  echo 'Facebook SDK returned an error: ' . $e->getMessage();
-  exit;
-}
+        $helper = $fb->getJavaScriptHelper();
 
-if (! isset($accessToken)) {
-  echo 'No cookie set or no OAuth data could be obtained from cookie.';
-  exit;
-}
+        try {
+            $accessToken = $helper->getAccessToken();
+        } catch (Facebook\Exceptions\FacebookResponseException $e) {
+            // When Graph returns an error
+            echo 'Graph returned an error: ' . $e->getMessage();
+            exit;
+        } catch (Facebook\Exceptions\FacebookSDKException $e) {
+            // When validation fails or other local issues
+            echo 'Facebook SDK returned an error: ' . $e->getMessage();
+            exit;
+        }
+
+        if (!isset($accessToken)) {
+            echo 'No cookie set or no OAuth data could be obtained from cookie.';
+            exit;
+        }
 
 // Logged in
 //echo '<h3>Access Token</h3>';
@@ -1247,215 +1278,251 @@ if (! isset($accessToken)) {
 //$_SESSION['fb_access_token'] = (string) $accessToken;
 
 
-if(isset($_POST['email'])):
+        if (isset($_POST['email'])):
 
-    $email_acesso = $_POST['email'];
+            $email_acesso = $_POST['email'];
 
-    else:
+        else:
 
-    $email_acesso = '';
+            $email_acesso = '';
 
- endif;
-    $token = (string) $accessToken;
-    $this->dadosfacebookrecupera($token,$email_acesso);
-                
+        endif;
+        $token = (string)$accessToken;
+        $this->dadosfacebookrecupera($token, $email_acesso);
+
     }
 
 
-public function dadosfacebookrecupera($token,$email){
+    public function dadosfacebookrecupera($token, $email)
+    {
 
 
-    require_once 'application/core/api/facebook/Facebook/autoload.php';
+        require_once 'application/core/api/facebook/Facebook/autoload.php';
 
 //$token = $_SESSION['fb_access_token'];
-$fb = new Facebook\Facebook([
-  'app_id' => '1870186193247282',
-  'app_secret' => '57f8277f7c2f9249165c840bef55d8de',
-  'default_graph_version' => 'v2.2',
-  ]);
+        $fb = new Facebook\Facebook([
+            'app_id' => '1870186193247282',
+            'app_secret' => '57f8277f7c2f9249165c840bef55d8de',
+            'default_graph_version' => 'v2.2',
+        ]);
 
-try {
-  // Returns a `Facebook\FacebookResponse` object
-  $response = $fb->get('/me?fields=id,name,email', $token);
-} catch(Facebook\Exceptions\FacebookResponseException $e) {
-  echo 'Graph returned an error: ' . $e->getMessage();
-  exit;
-} catch(Facebook\Exceptions\FacebookSDKException $e) {
-  echo 'Facebook SDK returned an error: ' . $e->getMessage();
-  exit;
-}
+        try {
+            // Returns a `Facebook\FacebookResponse` object
+            $response = $fb->get('/me?fields=id,name,email', $token);
+        } catch (Facebook\Exceptions\FacebookResponseException $e) {
+            echo 'Graph returned an error: ' . $e->getMessage();
+            exit;
+        } catch (Facebook\Exceptions\FacebookSDKException $e) {
+            echo 'Facebook SDK returned an error: ' . $e->getMessage();
+            exit;
+        }
 
-$user = $response->getGraphUser();
-
-
-if(!empty($email) and !isset($user['email'])):
+        $user = $response->getGraphUser();
 
 
-if (!preg_match('/^[0-9a-z\_\.\-]+\@[0-9a-z\_\.\-]*[0-9a-z\_\-]+\.[a-z]{2,3}$/i', $email))
-
-{
-    $user['email'] = '';
-    echo 'Email Inválido';
-
-}else{
- $user['email'] = $email;
-    
-}
+        if (!empty($email) and !isset($user['email'])):
 
 
-                  
-  
-  
+            if (!preg_match('/^[0-9a-z\_\.\-]+\@[0-9a-z\_\.\-]*[0-9a-z\_\-]+\.[a-z]{2,3}$/i', $email)) {
+                $user['email'] = '';
+                echo 'Email Inválido';
+
+            } else {
+                $user['email'] = $email;
+
+            }
 
 
-endif;
+        endif;
 
-if(isset($user['email'])):
+        if (isset($user['email'])):
 
-$this->db->select('firstname,email,pass,telefone');
-$this->db->from('users');
-$this->db->where('email',$user['email']);
-$this->db->or_where('fbid',$user['id']);
-$get = $this->db->get();
-if($get->num_rows() > 0):
+            $this->db->select('firstname,email,pass,telefone');
+            $this->db->from('users');
+            $this->db->where('email', $user['email']);
+            $this->db->or_where('fbid', $user['id']);
+            $get = $this->db->get();
+            if ($get->num_rows() > 0):
 //Aqui o Email vindo do facebook já Existe então realiza Login
 
-  if($this->Cadastro_Model->login(2, $user['email'], $get->result_array()[0]['pass'], '') == 11):
+                if ($this->Cadastro_Model->login(2, $user['email'], $get->result_array()[0]['pass'], '') == 11):
 
-   echo 11;
-    else:
+                    echo 11;
+                else:
 
-        echo 'Erro ao Logar com o Usuario, tente Mais Tarde';
+                    echo 'Erro ao Logar com o Usuario, tente Mais Tarde';
 
-    endif;    
+                endif;
 
 
-else:
+            else:
 //Aqui o Email vindo do facebook não Existe então realiza Cadastro
 
-if($this->Cadastro_Model->cadastro(2, $user['email'], 'fbonly', $user['id'], $user['name'], '','') == 11):
+                if ($this->Cadastro_Model->cadastro(2, $user['email'], 'fbonly', $user['id'], $user['name'], '', '') == 11):
 
-echo 11;
+                    echo 11;
 
-    else:
-        echo 'Erro ao Cadastrar o Usuario, tente Mais Tarde';
+                else:
+                    echo 'Erro ao Cadastrar o Usuario, tente Mais Tarde';
 
 
- endif;       
+                endif;
 
-endif;
+            endif;
 
-else:
+        else:
 
-echo '0727';
+            echo '0727';
 
-endif;
+        endif;
 
 //echo 'Name: ' . $user['name'];
 // OR
 // echo 'Name: ' . $user->getName();
 
-}
+    }
 
-public function adminLogin(){
+    public function adminLogin()
+    {
 
-if($this->SessionsVerify_Model->logVerAdmin() == false):
-
-
-if(isset($_POST['user']) and isset($_POST['pass'])):
+        if ($this->SessionsVerify_Model->logVerAdmin() == false):
 
 
-$this->db->from('admin');
-$this->db->where('name',$_POST['user']);
-$this->db->where('pass',hash('whirlpool',md5(sha1($_POST['pass']))));
-$get = $this->db->get();
-
-if($get->num_rows() > 0):
-
-    $result = $get->result_array();
-
-    $_SESSION['NAME_ADMIN'] = $_POST['user'];
-    $_SESSION['PASS_ADMIN'] = hash('whirlpool',md5(sha1($_POST['pass'])));
-    $_SESSION['ID_ADMIN'] = $result[0]['id_admin'];
-    $_SESSION['Auth02'] = 'true';
-
-    echo 11;
-
-    else:
-
-        echo 'Usuario ou senha incorretos.';
-
-endif;
-else:
-echo 'Dados de Entrada não recebidos';
-    endif;
-endif;
-}
-
-public function adminLogout(){
-if($this->SessionsVerify_Model->logVerAdmin() == true):
-
-        @session_destroy();
-        echo 11;
-endif;
-}
-
-public function requestadm(){
-if($this->SessionsVerify_Model->logVerAdmin() == true):
+            if (isset($_POST['user']) and isset($_POST['pass'])):
 
 
-    if(!isset($_POST['atual_pg'])):
-        $_POST['atual'] = 0; 
-    endif;
+                $this->db->from('admin');
+                $this->db->where('name', $_POST['user']);
+                $this->db->where('pass', hash('whirlpool', md5(sha1($_POST['pass']))));
+                $get = $this->db->get();
 
-    if($_POST['method'] == 1):
+                if ($get->num_rows() > 0):
 
-$this->load->view('admin/views/actions/tables',$_POST);
+                    $result = $get->result_array();
+
+                    $_SESSION['NAME_ADMIN'] = $_POST['user'];
+                    $_SESSION['PASS_ADMIN'] = hash('whirlpool', md5(sha1($_POST['pass'])));
+                    $_SESSION['ID_ADMIN'] = $result[0]['id_admin'];
+                    $_SESSION['Auth02'] = 'true';
+
+                    echo 11;
+
+                else:
+
+                    echo 'Usuario ou senha incorretos.';
+
+                endif;
+            else:
+                echo 'Dados de Entrada não recebidos';
+            endif;
         endif;
+    }
 
-           if($_POST['method'] == 2):
-$this->load->view('admin/views/actions/details',$_POST);
+    public function adminLogout()
+    {
+        if ($this->SessionsVerify_Model->logVerAdmin() == true):
+
+            @session_destroy();
+            echo 11;
         endif;
+    }
 
-endif;
-}
+    public function requestadm()
+    {
+        if ($this->SessionsVerify_Model->logVerAdmin() == true):
 
-public function deleteadmitem(){
 
-if($this->SessionsVerify_Model->logVerAdmin() == true):
+            if (!isset($_POST['atual_pg'])):
+                $_POST['atual'] = 0;
+            endif;
 
-    //Deletar usuarios
-    if($_POST['bancodedados'] == 'users'):
-    $this->db->where('id',$_POST['id']);
-    endif;
+            if ($_POST['method'] == 1):
 
-    //Deletar lojas
-    if($_POST['bancodedados'] == 'lojas'):
-    $this->db->where('id_loja',$_POST['id']);
-    endif;
+                $this->load->view('admin/views/actions/tables', $_POST);
+            endif;
 
- //Deletar medicamentos
-    if($_POST['bancodedados'] == 'medicamentos'):
-    $this->db->where('id',$_POST['id']);
-    endif;
+            if ($_POST['method'] == 2):
+                $this->load->view('admin/views/actions/details', $_POST);
+            endif;
 
-     //Deletar produtos disponiveis
-    if($_POST['bancodedados'] == 'produtos_disponiveis'):
-    $this->db->where('id_produto',$_POST['id']);
-    endif;
+        endif;
+    }
 
-    if($this->db->delete($_POST['bancodedados'])):
+    public function deleteadmitem()
+    {
 
-echo 11;
+        if ($this->SessionsVerify_Model->logVerAdmin() == true):
 
-        else:
-echo 'Erro ao deletar dados, tente mais tarde.';
+            //Deletar usuarios
+            if ($_POST['bancodedados'] == 'users'):
+                $this->db->where('id', $_POST['id']);
+            endif;
+
+            //Deletar lojas
+            if ($_POST['bancodedados'] == 'lojas'):
+                $this->db->where('id_loja', $_POST['id']);
+            endif;
+
+            //Deletar medicamentos
+            if ($_POST['bancodedados'] == 'medicamentos'):
+                $this->db->where('id', $_POST['id']);
+            endif;
+
+            //Deletar produtos disponiveis
+            if ($_POST['bancodedados'] == 'produtos_disponiveis'):
+                $this->db->where('id_produto', $_POST['id']);
+            endif;
+
+            if ($this->db->delete($_POST['bancodedados'])):
+
+                echo 11;
+
+            else:
+                echo 'Erro ao deletar dados, tente mais tarde.';
 
             endif;
 
 
+        endif;
 
-endif;
+    }
 
-}
+    public function editleilao()
+    {
+        if ($this->SessionsVerify_Model->logVerAdmin() == true):
+            if (isset($_POST)):
+
+                if($_POST['tpdatabase'] == 'users'):
+                    $this->db->where('id',$_POST['wherecond']);
+                endif;
+
+                if($_POST['tpdatabase'] == 'medicamentos'):
+                    $this->db->where('id',$_POST['wherecond']);
+                endif;
+
+
+                if($_POST['tpdatabase'] == 'lojas'):
+                    $this->db->where('id_loja',$_POST['wherecond']);
+                endif;
+
+                if($_POST['tpdatabase'] == 'produtos_disponiveis'):
+                    $this->db->where('id_pdp',$_POST['wherecond']);
+                endif;
+
+                $database = $_POST['wherecond'];
+                unset($_POST['wherecond']);
+                unset($_POST['tpdatabase']);
+                if($this->db->update($database,$_POST)):
+
+                    echo 11;
+
+                else:
+
+                    echo 'Erro ao alterar dados, tente novamente.';
+
+                endif;
+
+            endif;
+        endif;
+    }
 }
