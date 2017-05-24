@@ -284,7 +284,7 @@ endif;
 
                                 <br>
                                 <b data-toggle="modal" data-target="#addcarditem<?php echo $dds['id_pdp'];?>" style="cursor: pointer;"><i class="glyphicon glyphicon-shopping-cart"></i> Adicionar ao Carrinho</b>
-
+                                <a data-toggle="modal" data-target="#lance<?php echo $dds['id_pdp'];?>" class="btn" style="background:#dc0000;width: 100%;color: white;border-radius: 0;padding: 3%;font-weight: 600;"><i class="fa fa-gavel" aria-hidden="true"></i> DAR LANCE</a>
 
                             </div>
 

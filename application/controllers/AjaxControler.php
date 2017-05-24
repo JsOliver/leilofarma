@@ -545,6 +545,33 @@ class AjaxControler extends CI_Controller
                     $datans['ip_user'] = $_SERVER["REMOTE_ADDR"];
                     $this->db->insert('lances_users_dados', $datans);
 
+                    /* Início envio de e-mail para as farmácias e insert lances */
+                    $lojas = $this;
+                    $lojas->db->from('loja');
+                    $getLojas = $lojas>$db->get();
+                    $countLojas = $getLojas->num_rows();
+
+                    if($countLojas > 0){
+
+                        $this->load->library(“My_PHPMailer”);
+
+                        $resultLojas = $get->result_array();
+                        $subject = "Um cliente deu um lance em um produto";
+                        $body = "O cliente " . $_SESSION['NAME'] . "deu um lance em um produto entre no site para ver"; 
+
+                        foreach ($getLojas->result() as $row){
+                            /* Insert nas outras lojas */
+                            $data["id_loja"] = $row["id_loja"];
+                            $this->db->insert('lances', $data);
+
+                            send_mail($subject, $body, $row["email"]);
+
+                        }
+
+                    /* Fim envio de e-mail para as farmácias */
+
+                    }
+
                 else:
                     echo 'Quantidade em estoque limite atingida. Escolha entre 1 e ' . $unidade . ' unidades.';
                 endif;
