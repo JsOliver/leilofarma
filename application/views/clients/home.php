@@ -126,7 +126,7 @@
 
             </script>
 
-            <div id="produtos" style="z-index: 10; position: relative;">
+            <div id="produtos" style="position: relative;">
 
                 <?php
 

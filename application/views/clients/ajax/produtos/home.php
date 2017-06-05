@@ -286,6 +286,374 @@ endif;
                                 <b data-toggle="modal" data-target="#addcarditem<?php echo $dds['id_pdp'];?>" style="cursor: pointer;"><i class="glyphicon glyphicon-shopping-cart"></i> Adicionar ao Carrinho</b>
                                 <a data-toggle="modal" data-target="#lance<?php echo $dds['id_pdp'];?>" class="btn" style="background:#dc0000;width: 100%;color: white;border-radius: 0;padding: 3%;font-weight: 600;"><i class="fa fa-gavel" aria-hidden="true"></i> DAR LANCE</a>
 
+                                
+
+                                <!-- Modal -->
+
+                                <?php
+
+$this->db->from('produtos_disponiveis');
+$this->db->where('id_pdp', $dds['id_pdp']);
+$this->db->where('visible', 1);
+$get = $this->db->get();
+$count = $get->num_rows();
+if ($count == 0):
+    redirect(base_url('home'), 'refresh');
+else:
+    $result = $get->result_array();
+
+$this->db->from('medicamentos');
+    $this->db->where('id', $result[0]['id_produto']);
+    $getmed = $this->db->get();
+    $countmd = $getmed->num_rows();
+    if ($countmd == 0):
+
+        redirect(base_url('home'), 'refresh');
+
+    else:
+        $resultmed = $getmed->result_array();
+
+    endif;
+
+    $this->db->from('lojas');
+    $this->db->where('id_loja', $result[0]['id_loja']);
+    $getlj = $this->db->get();
+    if ($getlj->num_rows() == 0):
+
+        redirect(base_url('home'), 'refresh');
+
+    else:
+
+        $resultlj = $getlj->result_array();
+        $arrayreplace = array("(", ")", "-");
+
+    endif;
+
+endif;
+
+?>
+<div style="top: 10%;border-radius: 0; z-index: 200000;" class="modal fade" id="lance<?php echo $dds['id_pdp'];?>" tabindex="-1"
+     role="dialog" aria-labelledby="myModalLabel<?php echo $dds['id_pdp'];?>">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="border-radius:0px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel" style="float: left;color: black;">FAÇA SEU LANCE</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row" style="padding: 2%">
+                    <div class="col-md-8">
+                        <h4 style="font-weight: bold;color: black; font-size: 12pt;">Você quer dar
+                            um lance para adiquirir este produto? <a style="color: #940f14;"><?php echo $result[0]['nome_prod'];?></a></h4>
+                        <hr>
+                        <h5 style="color: black;text-align: left;">Indique a quantidade desejada e o
+                            valor de sua proposta</h5>
+
+                        <div style="text-align: left;">
+                            <form>
+                                <label style="width: 50%;">
+                                    <b style="font-size: 15pt;">R$</b>
+
+                                    <?php 
+
+                                        $desconto = 0;
+                                        $valor = 0;
+
+                                        if (empty($result[0]['desconto'])){
+                                            $desconto = number_format($result[0]['preco'], 2, ',', '.');
+                                        } else {
+                                            $desconto = number_format($result[0]['preco'] - $result[0]['preco'] / 100 * $result[0]['desconto'], 2, ',', '.');
+                                        }
+
+                                        if(empty($result[0]['desconto'])){
+                                            $valor = number_format($result[0]['preco'], 2, ',', '.');
+                                        } else {
+                                            $valor = number_format($result[0]['preco'] - $result[0]['preco'] / 100 * $result[0]['desconto'], 2, ',', '.');
+                                        }
+
+                                        ?>
+
+                                    <input
+                                        style="outline: none;border-radius: 5px;padding: 2%; font-size: 12pt; margin-top:-12px;box-shadow: none !important; border: 1px solid #cccccc;"
+                                        size="9" type="text" id="moneys"
+                                        placeholder="<?php echo $desconto; ?>" value="<?php echo $valor; ?>">
+                                </label>
+                                <label style="width:35%;">
+                                    <b style="font-size: 12pt;">Qntd.</b>
+
+                                    <input
+                                        style="outline: none;width:70px;border-radius: 5px;padding: 2%; font-size: 12pt; margin-top:-12px;box-shadow: none !important; border: 1px solid #cccccc;"
+                                        size="2" type="number" id="quantidade" placeholder="1" value="1">
+                                </label>
+                            </form>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="border: 1px solid #dfdfdf;">
+                        <a>
+
+                            <?php
+                            $this->db->from('medicamentos');
+                            $this->db->where('id', $dds['id_pdp']);
+                            $query = $this->db->get();
+                            $rest = $query->result_array();
+                            if (empty($rest[0]['image_1'])):
+
+
+                                $this->db->from('produtos_disponiveis');
+                                $this->db->where('id_pdp', $dds['id_pdp']);
+                                $query = $this->db->get();
+                                $resps = $query->result_array();
+                                if(!empty($resps[0]['image_1'])):
+                                    ?>
+
+
+                                    <img style="width: 100%;"
+                                         src="<?php echo base_url('imagem?tp=5&&im=1&&image=' . $this->uri->segment(4) . '') ?>">
+                                <?php else:?>
+
+
+                                    <img style="width: 150px;top: 0;"
+                                         src="<?php echo base_url('assets/'.$version.'/img/remedio.jpg')?>"
+                                         alt="<?php echo  str_replace('-',' ',ucwords($this->uri->segment(3)));?>">
+
+
+
+                                <?php endif; else:
+
+                                $this->db->from('produtos_disponiveis');
+                                $this->db->where('id_pdp', $dds['id_pdp']);
+                                $query = $this->db->get();
+                                if(!empty($query->result_array()['image_1'])):
+
+                                    ?>
+
+
+                                    <img style="width: 100%;"
+                                         src="<?php echo base_url('imagem?tp=5&&im=1&&image=' . $this->uri->segment(4) . '') ?>">
+                                <?php else:?>
+
+                                    <img style="width: 100%;"
+                                         src="<?php echo base_url('imagem?tp=1&&im=1&&image=' . $result[0]['id_produto'] . '') ?>">
+                                <?php endif;?>
+
+
+                            <?php endif; ?>
+
+</a>
+                    </div>
+                    <?php if ($status == false): ?>
+                        <div class="col-md-12">
+
+                            <h5 style="font-weight: 600; color: black;">Preencha corretamente os
+                                campos abaixo para que nossos especialistas entrem em contato.</h5>
+                            <div style="text-align: left;">
+                                <br>
+                                <label style="width: 48%;">
+                                    <b>Nome:</b>
+                                    <input id="nomenl"
+                                        style="padding: 2%;outline: none;border-radius: 5px;border: 1px solid #cccccc;"
+                                        type="text" placeholder="Seu nome">
+                                </label>
+
+                                <label style="width: 47%;">
+                                    <b>E-mail:</b>
+                                    <input id="emailnl"
+                                        style="padding: 2%;outline: none;border-radius: 5px;border: 1px solid #cccccc;"
+                                        type="text" placeholder="Seu e-mail">
+                                </label>
+                                <br>
+                                <br>
+                                <label style="width: 100%;">
+                                    <b>Telefone:</b>
+                                    <input id="dddnl"
+                                        style="padding: 1%;outline: none;border-radius: 5px;border: 1px solid #cccccc;"
+                                        type="text" placeholder="DDD" size="2">
+                                    <input id="telefonenl"
+                                        style="padding: 1%;outline: none; border-radius: 5px;border: 1px solid #cccccc;"
+                                        type="text" placeholder="" size="14">
+                                    <span id="btns">   <a href="javascript:lance('<?php echo $result[0]['id_loja'];?>' , '<?php echo '#MD0'.$resultmed[0]['id'].''; ?>' , '<?php echo $this->uri->segment(4);?>');" class="btn"
+                                       style="background:#ae1b21;color: white; width:40%; margin: 0 0 0 2%;border-radius: 5px;padding: 2.1% 1% 2.1% 1%;font-weight: 600;"><i
+                                            class="fa fa-gavel" aria-hidden="true"></i> DAR
+                                        LANCE</a> </span>
+                                    <br>
+                                    <h3 style="text-align: center;" id="lanceresult"></h3>
+                                </label>
+
+
+                            </div>
+                        </div>
+
+                    <?php else: ?>
+                       <span id="btns"> <a href="javascript:lance('<?php echo $result[0]['id_loja'];?>' , '<?php echo '#MD0'.$resultmed[0]['id'].''; ?>' , '<?php echo $this->uri->segment(4);?>');" class="btn"
+                           style="background:#ae1b21;color: white; width:30%; float: right; margin: 10px 0 0 1%;border-radius: 5px;padding: 2.1% 0.5% 2.1% 0.5%;font-weight: 600;"><i
+                                class="fa fa-gavel" aria-hidden="true"></i> DAR LANCE</a> </span>
+                        <br>
+                        <b id="lanceresult"></b>
+                    <?php endif; ?>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div style="top: 10%;border-radius: 0; z-index: 200000;" class="modal fade" id="addcard" tabindex="-1"
+     role="dialog"
+     aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="border-radius:0px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel" style="float: left;color: black;">Adicionar ao Carrinho</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row" style="padding: 2%">
+                    <div class="col-md-8">
+                        <h4 style="font-weight: bold;color: black; font-size: 12pt;">Você quer dar
+                            um lance para adiquirir este produto? <a style="color: #940f14;"><?php echo $result[0]['nome_prod'];?></a></h4>
+                        <hr>
+                        <h5 style="color: black;text-align: left;">Indique a quantidade desejada e o
+                            valor de sua proposta</h5>
+
+
+                        <div id="div2" style="text-align: left;">
+                            <form>
+                                <label style="width: 50%;">
+                                    <b style="font-size: 15pt;">R$</b>
+
+                                    <?php 
+
+                                        $desconto = 0;
+                                        $valor = 0;
+
+                                        if (empty($result[0]['desconto'])){
+                                            $desconto = number_format($result[0]['preco'], 2, ',', '.');
+                                        } else {
+                                            $desconto = number_format($result[0]['preco'] - $result[0]['preco'] / 100 * $result[0]['desconto'], 2, ',', '.');
+                                        }
+
+                                        if(empty($result[0]['desconto'])){
+                                            $valor = number_format($result[0]['preco'], 2, ',', '.');
+                                        } else {
+                                            $valor = number_format($result[0]['preco'] - $result[0]['preco'] / 100 * $result[0]['desconto'], 2, ',', '.');
+                                        }
+
+                                        ?>
+
+                                   
+                                    <input
+                                        style="outline: none;border-radius: 5px;padding: 2%; font-size: 12pt; margin-top:-12px;box-shadow: none !important; border: 1px solid #cccccc;"
+                                        size="9" type="text" id="moneys"
+                                        placeholder="<?php echo $desconto; ?>" value="<?php echo $valor; ?>">
+                                </label>
+                                <label style="width:35%;">
+                                    <b style="font-size: 12pt;">Qntd.</b>
+
+                                    <input
+                                        style="outline: none;width:70px;border-radius: 5px;padding: 2%; font-size: 12pt; margin-top:-12px;box-shadow: none !important; border: 1px solid #cccccc;"
+                                        size="2" type="number" id="quantidadecard" placeholder="1" value="1">
+                                </label>
+                            </form>
+                            <?php if(!empty($resultmed[0]['fixa_cal'])):?>
+
+                                <p style="margin-top: 5px;">
+                                    <b>Detalhes:</b>  <?php echo $resultmed[0]['fixa_cal'];?>
+                                </p>
+                            <?php endif;?>
+
+                            <?php if(!empty($resultmed[0]['posologia'])):?>
+                                <p>
+                                    <b>Posologia:</b>  <?php echo $resultmed[0]['posologia'];?>
+                                </p>
+                            <?php endif;?>
+                            <?php if(!empty($resultmed[0]['indicacoes'])):?>
+
+                                <p>
+                                    <b>Indicações:</b> <?php echo $resultmed[0]['indicacoes'];?>
+                                </p>
+                            <?php endif;?>
+                            <?php if(!empty($resultmed[0]['contra_indicacoes'])):?>
+
+                                <p>
+                                    <b>Contra Indicações:</b> <?php echo $resultmed[0]['contra_indicacoes'];?>
+                                </p>
+                            <?php endif;?>
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="border: 1px solid #dfdfdf;">
+                        <a>
+
+                            <?php
+                            $this->db->from('medicamentos');
+                            $this->db->where('id', $result[0]['id_produto']);
+                            $query = $this->db->get();
+                            $rest = $query->result_array();
+                            if (empty($rest[0]['image_1'])):
+
+
+                                $this->db->from('produtos_disponiveis');
+                                $this->db->where('id_pdp', $this->uri->segment(4));
+                                $query = $this->db->get();
+                                $resps = $query->result_array();
+                                if(!empty($resps[0]['image_1'])):
+                                    ?>
+
+
+                                    <img style="width: 100%;"
+                                         src="<?php echo base_url('imagem?tp=5&&im=1&&image=' . $this->uri->segment(4) . '') ?>">
+                                <?php else:?>
+
+
+                                    <img style="width: 150px;top: 0;"
+                                         src="<?php echo base_url('assets/'.$version.'/img/remedio.jpg')?>"
+                                         alt="<?php echo  str_replace('-',' ',ucwords($this->uri->segment(3)));?>">
+
+
+
+                                <?php endif; else:
+
+                                $this->db->from('produtos_disponiveis');
+                                $this->db->where('id_pdp', $this->uri->segment(4));
+                                $query = $this->db->get();
+                                if(!empty($query->result_array()['image_1'])):
+
+                                    ?>
+
+
+                                    <img style="width: 100%;"
+                                         src="<?php echo base_url('imagem?tp=5&&im=1&&image=' . $this->uri->segment(4) . '') ?>">
+                                <?php else:?>
+
+                                    <img style="width: 100%;"
+                                         src="<?php echo base_url('imagem?tp=1&&im=1&&image=' . $result[0]['id_produto'] . '') ?>">
+                                <?php endif;?>
+
+
+                            <?php endif; ?>
+
+                        </a>
+                    </div>
+
+                       <span id="btnscr"> <a href="javascript:addcard('<?php echo $result[0]['id_loja'];?>' , '<?php echo '#MD0'.$resultmed[0]['id'].''; ?>' , '<?php echo $this->uri->segment(4);?>');" class="btn"
+                           style="background:#ae1b21;color: white; width:30%; float: right; margin: 10px 0 0 1%;border-radius: 5px;padding: 2.1% 0.5% 2.1% 0.5%;font-weight: 600;"><i
+                                class="fa fa-card" aria-hidden="true"></i> Add ao Carrinho</a> </span>
+                        <br>
+                        <b id="lanceresult"></b>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+                                <!--- // Fim Modal -->
+                                
+
                             </div>
 
                             <div style="float: right;border-left: 1px solid #d6d6d6; padding-left: 10px;">
