@@ -14,11 +14,11 @@ class My_PHPMailer {
 	    $mail->SMTPAuth = true; 
 	    $mail->SMTPSecure = "ssl"; 
 	    $mail->Host = "smtp.gmail.com"; 
-	    $mail->Port = 465; 
-	    $mail->Username = "username@leilofarma.com";
-	    $mail->Password = "*****"; 
-	    $mail->SetFrom('email@email.com', 'Leilofarma'); 
-	    $mail->AddReplyTo("response@email.com","Leilofarma"); 
+	    $mail->Port = 587;
+        $mail->Username = "joaovictordada2@gmail.com";
+        $mail->Password = "000480126";
+        $mail->SetFrom('joaovictordada2@gmail.com', 'Leilofarma');
+        $mail->AddReplyTo("joaovictordada2@gmail.com","Leilofarma");
 	    $mail->Subject = $subject; 
 	    $mail->Body = $body;
 	    $mail->AltBody = $body;

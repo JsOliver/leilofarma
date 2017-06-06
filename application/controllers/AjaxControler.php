@@ -548,12 +548,12 @@ class AjaxControler extends CI_Controller
                     /* Início envio de e-mail para as farmácias e insert lances */
                     $lojas = $this;
                     $lojas->db->from('loja');
-                    $getLojas = $lojas>$db->get();
+                    $getLojas = $lojas->$db->get();
                     $countLojas = $getLojas->num_rows();
 
                     if($countLojas > 0){
 
-                        $this->load->library(“My_PHPMailer”);
+                        $this->load->library('My_PHPMailer');
 
                         $resultLojas = $get->result_array();
                         $subject = "Um cliente deu um lance em um produto";
@@ -567,7 +567,6 @@ class AjaxControler extends CI_Controller
                             send_mail($subject, $body, $row["email"]);
 
                         }
-
                     /* Fim envio de e-mail para as farmácias */
 
                     }
