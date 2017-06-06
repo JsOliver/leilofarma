@@ -572,7 +572,7 @@ class AjaxControler extends CI_Controller
 
                     }
 
-                else:
+                else 
                     echo 'Quantidade em estoque limite atingida. Escolha entre 1 e ' . $unidade . ' unidades.';
                 endif;
 
