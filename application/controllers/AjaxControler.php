@@ -9,6 +9,8 @@ class AjaxControler extends CI_Controller
         $this->load->model('SessionsVerify_Model');
         $this->load->model('Cadastro_Model');
         $this->load->model('Functions_Model');
+        $this->load->model('Myphpmailer_Model');
+
         $this->load->library('email');
         @session_start();
 
@@ -545,33 +547,42 @@ class AjaxControler extends CI_Controller
                     $datans['ip_user'] = $_SERVER["REMOTE_ADDR"];
                     $this->db->insert('lances_users_dados', $datans);
 
-                    /* Início envio de e-mail para as farmácias e insert lances */
-                    $lojas = $this;
-                    $lojas->db->from('loja');
-                    $getLojas = $lojas->$db->get();
-                    $countLojas = $getLojas->num_rows();
+                    echo 11;
 
+
+                    /* Início envio de e-mail para as farmácias e insert lances */
+
+                    $this->db->from('set_mails');
+                    $this->db->where('id_mail', 1);
+                    $getms = $this->db->get();
+                    $results = $getms->result_array();
+
+                    $mailtxt = base64_decode($results[0]['email']);
+
+    $body = $mailtxt;
+
+                   $this->db->from('lojas');
+                   $getLojas = $this->db->get();
+                    $countLojas = $getLojas->num_rows();
                     if($countLojas > 0){
 
-                        $this->load->library('My_PHPMailer');
-
-                        $resultLojas = $get->result_array();
+                        $resultLojas = $getLojas->result_array();
                         $subject = "Um cliente deu um lance em um produto";
-                        $body = "O cliente " . $_SESSION['NAME'] . "deu um lance em um produto entre no site para ver"; 
 
-                        foreach ($getLojas->result() as $row){
+
+                        foreach ($resultLojas as $row){
                             /* Insert nas outras lojas */
                             $data["id_loja"] = $row["id_loja"];
                             $this->db->insert('lances', $data);
 
-                            send_mail($subject, $body, $row["email"]);
+                            $this->Myphpmailer_Model->send_mail($subject, str_replace('(<=p=>)',$result[0]['nome_prod'],str_replace('(<=$=>)',$_POST['valor'],str_replace('(<=q=>)',$_POST['quantidade'],str_replace('(<=c=>)',$_SESSION['NAME'],str_replace('(<=em=>)',$_SESSION['EMAIL'],$body))))), $row["email"]);
 
                         }
                     /* Fim envio de e-mail para as farmácias */
 
                     }
 
-                else 
+                else
                     echo 'Quantidade em estoque limite atingida. Escolha entre 1 e ' . $unidade . ' unidades.';
                 endif;
 
@@ -579,7 +590,6 @@ class AjaxControler extends CI_Controller
             endif;
 
 
-            echo 11;
 
         elseif ($this->SessionsVerify_Model->logver() == false):
 
@@ -611,7 +621,50 @@ class AjaxControler extends CI_Controller
                         $datans['ip_user'] = $_SERVER["REMOTE_ADDR"];
                         $this->db->insert('lances_users_dados', $datans);
 
-                    else:
+
+
+
+
+                        /* Início envio de e-mail para as farmácias e insert lances */
+
+                        $this->db->from('set_mails');
+                        $this->db->where('id_mail', 1);
+                        $getms = $this->db->get();
+                        $results = $getms->result_array();
+
+                        $mailtxt = base64_decode($results[0]['email']);
+
+                        $body = $mailtxt;
+
+                        $this->db->from('lojas');
+                        $getLojas = $this->db->get();
+                        $countLojas = $getLojas->num_rows();
+
+
+                        if($countLojas > 0):
+                            $resultLojas = $getLojas->result_array();
+                            $subject = "Um cliente deu um lance em um produto";
+
+
+                            foreach ($resultLojas as $row){
+                                /* Insert nas outras lojas */
+                                $data["id_loja"] = $row["id_loja"];
+                                $this->db->insert('lances', $data);
+
+                                $this->Myphpmailer_Model->send_mail($subject, str_replace('(<=p=>)',$result[0]['nome_prod'],str_replace('(<=$=>)',$_POST['valor'],str_replace('(<=q=>)',$_POST['quantidade'],str_replace('(<=c=>)',$_POST['nome'],str_replace('(<=em=>)',$_POST['email'],$body))))), $row["email"]);
+
+                            }
+                            /* Fim envio de e-mail para as farmácias */
+
+
+
+                        endif;
+
+
+
+
+
+                        else:
                         echo 'Quantidade em estoque limite atingida. Escolha entre 1 e ' . $unidade . ' unidades.';
                     endif;
 

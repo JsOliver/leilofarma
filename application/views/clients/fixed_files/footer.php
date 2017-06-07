@@ -349,7 +349,7 @@ endif;
                     }
                 },
                 error: function (result) {
-                    alert('erro');
+                    alert(result);
                     loja = ' \'\ ' + loja + ' \'\ ';
                     codigo = ' \'\ ' + codigo + ' \'\ ';
                     produto = ' \'\ ' + produto + ' \'\ ';
