@@ -547,7 +547,7 @@ class AjaxControler extends CI_Controller
 
                     /* Início envio de e-mail para as farmácias e insert lances */
                     $lojas = $this;
-                    $lojas->db->from('loja');
+                    $lojas->db->from('lojas');
                     $getLojas = $lojas->$db->get();
                     $countLojas = $getLojas->num_rows();
 
