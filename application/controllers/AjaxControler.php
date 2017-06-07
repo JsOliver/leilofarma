@@ -551,13 +551,11 @@ class AjaxControler extends CI_Controller
 
 
                     /* Início envio de e-mail para as farmácias e insert lances */
-<<<<<<< HEAD
-=======
                     $lojas = $this;
                     $lojas->db->from('lojas');
                     $getLojas = $lojas->$db->get();
                     $countLojas = $getLojas->num_rows();
->>>>>>> origin/master
+
 
                     $this->db->from('set_mails');
                     $this->db->where('id_mail', 1);
@@ -566,7 +564,7 @@ class AjaxControler extends CI_Controller
 
                     $mailtxt = base64_decode($results[0]['email']);
 
-    $body = $mailtxt;
+                    $body = $mailtxt;
 
                    $this->db->from('lojas');
                    $getLojas = $this->db->get();
