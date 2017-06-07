@@ -17,10 +17,10 @@ class My_PHPMailer {
        try {
             $mail->SMTPSecure = 'tls';
             $mail->Host = 'smtp.gmail.com'; 
-            $mail->SMTPAuth   = true;  
-            $mail->Port       = 587; 
+            $mail->SMTPAuth = true;  
+            $mail->Port = 587; 
             $mail->Username = 'joaovictordada2@gmail.com'; 
-            $mail->Password = '000480126'; /
+            $mail->Password = '000480126';
 
             $mail->SetFrom('joaovictordada2@gmail.com', 'Leilofarma'); 
             $mail->AddReplyTo('joaovictordada2@gmail.com', 'Leilofarma'); 
