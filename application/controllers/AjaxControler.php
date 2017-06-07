@@ -344,7 +344,7 @@ class AjaxControler extends CI_Controller
 
 
                 if (!empty($imagem1)):
-                    $date['image_1'] = @trim(file_get_contents(addslashes($imagem1)));
+                    $date['image_1'] = $imagem1;
                 endif;
 
 
@@ -369,11 +369,11 @@ class AjaxControler extends CI_Controller
                 $countctm = $getctm->num_rows();
                 if ($countctm == 0):
                     if (!empty($imagem1)):
-                        $dada['image_1'] = @trim(file_get_contents(addslashes($imagem1)));
+                        $dada['image_1'] = $imagem1;
                     endif;
 
                     if (!empty($imagem2)):
-                        $dada['image_2'] = trim(file_get_contents(addslashes($imagem2)));
+                        $dada['image_2'] = $imagem2;
                     endif;
                     $dada['keywords'] = trim($keyword);
                     $dada['marca'] = trim($laboratorio);
@@ -419,11 +419,11 @@ class AjaxControler extends CI_Controller
                             $dados['data_adicionado'] = date('YmdHis');
 
                             if (!empty($imagem1)):
-                                $dados['image_1'] = @trim(file_get_contents(addslashes($imagem1)));
+                                $dados['image_1'] = $imagem1;
                             endif;
 
                             if (!empty($imagem2)):
-                                $dados['image_2'] = trim(file_get_contents(addslashes($imagem2)));
+                                $dados['image_2'] = $imagem2;
                             endif;
 
                             /*if(!empty($categoria1)):
