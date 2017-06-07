@@ -1,5 +1,7 @@
 <?php
-
+header('Content-Type: text/html; charset=utf-8');
+ini_set('max_input_nesting_level','100000');
+ini_set('max_execution_time','100000');
 setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 date_default_timezone_set('America/Sao_Paulo');
 

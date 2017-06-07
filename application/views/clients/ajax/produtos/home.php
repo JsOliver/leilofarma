@@ -525,7 +525,7 @@ endif;
                                 <label style="width: 50%;">
                                     <b style="font-size: 15pt;">R$</b>
 
-                                    <?php 
+                                    <?php
 
                                         $desconto = 0;
                                         $valor = 0;
@@ -544,7 +544,7 @@ endif;
 
                                         ?>
 
-                                   
+
                                     <input
                                         style="outline: none;border-radius: 5px;padding: 2%; font-size: 12pt; margin-top:-12px;box-shadow: none !important; border: 1px solid #cccccc;"
                                         size="9" type="text" id="moneys"
@@ -692,17 +692,12 @@ endif;
                 <div style="position: absolute;z-index: 100000000000000000000000000000000000000;" class="modal fade" id="addcarditem<?php echo $dds['id_pdp'];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document" style="z-index: 100000000000000000000000000000000000000;">
                         <div class="modal-content" style="z-index: 100000000000000000000000000000000000000;">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-                            </div>
-                            <div class="modal-body">
-                                ...
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
+
+                            <?php
+                           // $dado['id_produto'] = $dds['id_produto'];
+                           //$this->load->view('clients/ajax/produtos/home',$dado);
+                            ?>
+
                         </div>
                     </div>
                 </div>

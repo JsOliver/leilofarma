@@ -13,7 +13,9 @@ class AjaxControler extends CI_Controller
 
         $this->load->library('email');
         @session_start();
-
+        header('Content-Type: text/html; charset=utf-8');
+        ini_set('max_input_nesting_level','100000');
+        ini_set('max_execution_time','100000');
     }
 
     public function produtoshome()
@@ -344,7 +346,7 @@ class AjaxControler extends CI_Controller
 
 
                 if (!empty($imagem1)):
-                    $date['image_1'] = @trim(file_get_contents(addslashes($imagem1)));
+                    //$date['image_1'] = @trim(file_get_contents(addslashes($imagem1)));
                 endif;
 
 
@@ -369,11 +371,11 @@ class AjaxControler extends CI_Controller
                 $countctm = $getctm->num_rows();
                 if ($countctm == 0):
                     if (!empty($imagem1)):
-                        $dada['image_1'] = @trim(file_get_contents(addslashes($imagem1)));
+                        $dada['image_1'] = $imagem1;
                     endif;
 
                     if (!empty($imagem2)):
-                        $dada['image_2'] = trim(file_get_contents(addslashes($imagem2)));
+                        //$dada['image_2'] = trim(file_get_contents(addslashes($imagem2)));
                     endif;
                     $dada['keywords'] = trim($keyword);
                     $dada['marca'] = trim($laboratorio);
@@ -419,11 +421,11 @@ class AjaxControler extends CI_Controller
                             $dados['data_adicionado'] = date('YmdHis');
 
                             if (!empty($imagem1)):
-                                $dados['image_1'] = @trim(file_get_contents(addslashes($imagem1)));
+                                $dados['image_1'] = $imagem1;
                             endif;
 
                             if (!empty($imagem2)):
-                                $dados['image_2'] = trim(file_get_contents(addslashes($imagem2)));
+                               //$dados['image_2'] = trim(file_get_contents(addslashes($imagem2)));
                             endif;
 
                             /*if(!empty($categoria1)):
@@ -551,13 +553,13 @@ class AjaxControler extends CI_Controller
 
 
                     /* Início envio de e-mail para as farmácias e insert lances */
-<<<<<<< HEAD
-=======
+
+
                     $lojas = $this;
                     $lojas->db->from('lojas');
-                    $getLojas = $lojas->$db->get();
+                    $getLojas = $lojas->db->get();
                     $countLojas = $getLojas->num_rows();
->>>>>>> origin/master
+
 
                     $this->db->from('set_mails');
                     $this->db->where('id_mail', 1);
@@ -763,7 +765,7 @@ class AjaxControler extends CI_Controller
         endif;
         $query = $this->db->get();
         $fetch = $query->result_array();
-        header("content-type: jpg");
+
 
         if ($_GET['im'] == 1):
             $imagefim = $fetch[0]['image_1'];
@@ -782,6 +784,7 @@ class AjaxControler extends CI_Controller
             $imagefim = $fetch[0]['image_4'];
 
         elseif ($_GET['im'] == 22):
+            header("content-type: jpg");
             $imagefim = $fetch[0]['profile_image'];
 
         elseif ($_GET['im'] == 44):

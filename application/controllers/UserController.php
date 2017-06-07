@@ -10,8 +10,12 @@ class UserController extends CI_Controller
         $this->load->model('SessionsVerify_Model');
         $this->load->helper('text');
 		$this->load->database();
+        $this->CI =& get_instance();
 
 
+        header('Content-Type: text/html; charset=utf-8');
+        ini_set('max_input_nesting_level','100000');
+        ini_set('max_execution_time','100000');
 
     }
 
