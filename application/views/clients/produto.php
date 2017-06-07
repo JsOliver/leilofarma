@@ -81,18 +81,18 @@ endif;
 
                             <div class="ms-slide">
                                 <img class="ms-brd"
-                                     src="<?php echo base_url('imagem?tp=5&&im=1&&image=' . $this->uri->segment(4) . '') ?>"
+                                     src="<?php echo $resps[0]['image_1'] ?>"
                                      alt="<?php echo  str_replace('-',' ',ucwords($this->uri->segment(3)));?>">
                                 <img class="ms-thumb" style="height: 110px;object-fit: cover; object-position: center;"
-                                     src="<?php echo base_url('imagem?tp=5&&im=1&&image=' . $this->uri->segment(4) . '') ?>"
+                                     src="<?php echo $resps[0]['image_1'] ?>"
                                      alt="<?php echo  str_replace('-',' ',ucwords($this->uri->segment(3)));?>">
                             </div>
                             <div class="ms-slide">
                                 <img class="ms-brd"
-                                     src="<?php echo base_url('imagem?tp=5&&im=2&&image=' . $this->uri->segment(4) . '') ?>"
+                                     src="<?php echo $resps[0]['image_1'] ?>"
                                      alt="<?php echo  str_replace('-',' ',ucwords($this->uri->segment(3)));?>">
                                 <img class="ms-thumb" style="height: 110px;object-fit: cover; object-position: center;"
-                                     src="<?php echo base_url('imagem?tp=5&&im=2&&image=' . $this->uri->segment(4) . '') ?>"
+                                     src="<?php echo $resps[0]['image_1'] ?>"
                                      alt="<?php echo  str_replace('-',' ',ucwords($this->uri->segment(3)));?>">
                             </div>
 
@@ -110,29 +110,29 @@ endif;
                             $this->db->from('produtos_disponiveis');
                             $this->db->where('id_pdp', $this->uri->segment(4));
                             $query = $this->db->get();
-                            if(!empty($query->result_array()['image_1'])):
+                            if(!empty($query->result_array()['image_2'])):
 
                             ?>
                                 <div class="ms-slide">
                                     <img class="ms-brd"
-                                         src="<?php echo base_url('imagem?tp=5&&im=1&&image=' . $this->uri->segment(4) . '') ?>"
+                                         src="<?php echo $resps[0]['image_2'] ?>"
                                          alt="<?php echo  str_replace('-',' ',ucwords($this->uri->segment(3)));?>">
                                     <img class="ms-thumb" style="height: 110px;object-fit: cover; object-position: center;"
-                                         src="<?php echo base_url('imagem?tp=5&&im=1&&image=' . $this->uri->segment(4) . '') ?>"
+                                         src="<?php echo $resps[0]['image_2'] ?>"
                                          alt="<?php echo  str_replace('-',' ',ucwords($this->uri->segment(3)));?>">
                                 </div>
                                 <div class="ms-slide">
                                     <img class="ms-brd"
-                                         src="<?php echo base_url('imagem?tp=5&&im=2&&image=' . $this->uri->segment(4) . '') ?>"
+                                         src="<?php echo $resps[0]['image_1'] ?>"
                                          alt="<?php echo  str_replace('-',' ',ucwords($this->uri->segment(3)));?>">
                                     <img class="ms-thumb" style="height: 110px;object-fit: cover; object-position: center;"
-                                         src="<?php echo base_url('imagem?tp=5&&im=2&&image=' . $this->uri->segment(4) . '') ?>"
+                                         src="<?php echo $resps[0]['image_1'] ?>"
                                          alt="<?php echo  str_replace('-',' ',ucwords($this->uri->segment(3)));?>">
                                 </div>
                                 <?php else:?>
                             <div class="ms-slide">
                                 <img class="ms-brd"
-                                     src="<?php echo base_url('imagem?tp=1&&im=1&&image=' . $result[0]['id_produto'] . '') ?>"
+                                     src="<?php echo $resps[0]['image_1'] ?>"
                                      alt="<?php echo  str_replace('-',' ',ucwords($this->uri->segment(3)));?>">
                                 
                             </div>
@@ -147,10 +147,10 @@ endif;
                             ?>
                             <div class="ms-slide">
                                 <img class="ms-brd"
-                                     src="<?php echo base_url('imagem?tp=1&&im=3&&image=' . $result[0]['id_produto'] . '') ?>"
+                                     src="<?php echo $resps[0]['image_3'] ?>"
                                      alt="<?php echo  str_replace('-',' ',ucwords($this->uri->segment(3)));?>">
                                 <img class="ms-thumb" style="height: 110px;object-fit: cover; object-position: center;"
-                                     src="<?php echo base_url('imagem?tp=1&&im=3&&image=' . $result[0]['id_produto'] . '') ?>"
+                                     src="<?php echo $resps[0]['image_3'] ?>"
                                      alt="<?php echo  str_replace('-',' ',ucwords($this->uri->segment(3)));?>">
                             </div>
                                 <?php endif;?>
@@ -162,10 +162,10 @@ endif;
                             ?>
                             <div class="ms-slide">
                                 <img class="ms-brd"
-                                     src="<?php echo base_url('imagem?tp=1&&im=4&&image=' . $result[0]['id_produto'] . '') ?>"
+                                     src="<?php echo $resps[0]['image_4'] ?>"
                                      alt="<?php echo  str_replace('-',' ',ucwords($this->uri->segment(3)));?>">
                                 <img class="ms-thumb" style="height: 110px;object-fit: cover; object-position: center;"
-                                     src="<?php echo base_url('imagem?tp=1&&im=4&&image=' . $result[0]['id_produto'] . '') ?>"
+                                     src="<?php echo $resps[0]['image_4'] ?>"
                                      alt="<?php echo  str_replace('-',' ',ucwords($this->uri->segment(3)));?>">
                             </div>
                         <?php endif;?>

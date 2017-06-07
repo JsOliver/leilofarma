@@ -409,7 +409,7 @@ endif;
 
 
                                     <img style="width: 100%;"
-                                         src="<?php echo base_url('imagem?tp=5&&im=1&&image=' . $this->uri->segment(4) . '') ?>">
+                                         src="<?php echo $resps[0]['image_1'] ?>">
                                 <?php else:?>
 
 
@@ -430,11 +430,11 @@ endif;
 
 
                                     <img style="width: 100%;"
-                                         src="<?php echo base_url('imagem?tp=5&&im=1&&image=' . $this->uri->segment(4) . '') ?>">
+                                         src="<?php echo $resps[0]['image_1']?>">
                                 <?php else:?>
 
                                     <img style="width: 100%;"
-                                         src="<?php echo base_url('imagem?tp=1&&im=1&&image=' . $result[0]['id_produto'] . '') ?>">
+                                         src="<?php echo $resps[0]['image_1'] ?>">
                                 <?php endif;?>
 
 

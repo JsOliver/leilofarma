@@ -116,7 +116,7 @@ if ($count > 0):
 
                                 <?php else: ?>
                                     <img class="rounded-x"
-                                         src="<?php echo base_url('imagem?tp=1&&im=1&&image=' . $dds['id_produto'] . '') ?>"
+                                         src="<?php echo $rest[0]['image_1'] ?>"
                                          alt="">
                                 <?php endif; ?>
 
