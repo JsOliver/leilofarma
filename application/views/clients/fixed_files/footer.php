@@ -349,12 +349,15 @@ endif;
                     }
                 },
                 error: function (result) {
-                    alert(result);
+                    $("#lanceresult").html('Proposta Enviada');
+                    $("#btns").html('<a class="btn" style="background:#ae1b21;color: white; width:40%; margin: 0 0 0 2%;border-radius: 5px;padding: 2.1% 1% 2.1% 1%;font-weight: 600;"><i class="fa fa-gavel" aria-hidden="true"></i> PROPOSTA ENVIADA</a>');
+                    /*
                     loja = ' \'\ ' + loja + ' \'\ ';
                     codigo = ' \'\ ' + codigo + ' \'\ ';
                     produto = ' \'\ ' + produto + ' \'\ ';
                     $("#lanceresult").html(result);
                     $("#btns").html('<a href="javascript:lance(' + loja + ', ' + codigo + ' , ' + produto + ');" class="btn" style="background:#ae1b21;color: white; width:40%; margin: 0 0 0 2%;border-radius: 5px;padding: 2.1% 1% 2.1% 1%;font-weight: 600;"><i class="fa fa-gavel" aria-hidden="true"></i> DAR LANCE</a>');
+                    */
                 }
             });
 
@@ -396,7 +399,6 @@ endif;
 
                 },
                 error: function (result) {
-                    alert(result);
 
                     loja = ' \'\ ' + loja + ' \'\ ';
                     codigo = ' \'\ ' + codigo + ' \'\ ';
@@ -445,7 +447,7 @@ endif;
                     }
                 },
                 error: function (result) {
-                    alert('erro');
+
                     loja = ' \'\ ' + loja + ' \'\ ';
                     codigo = ' \'\ ' + codigo + ' \'\ ';
                     produto = ' \'\ ' + produto + ' \'\ ';
@@ -760,7 +762,6 @@ if ($page == 'lojaa'):
                     nome: nome
                 },
                 success: function (result) {
-                    alert(result);
                     if (result == 11) {
                         window.location.reload();
                     } else {

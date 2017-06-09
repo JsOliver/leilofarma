@@ -37,9 +37,9 @@
                                         $count = $get->num_rows();
 
                                         if ($count > 0):
-                                            $result = $get->result_array();
+                                            $results = $get->result_array();
 
-                                            $name = $result[0]['nome_prod'];
+                                            $name = $results[0]['nome_prod'];
                                             $data = $dds['data_visita'];
                                             $ano = substr($data, 0, 4);
                                             $mes = substr($data, 4, 2);

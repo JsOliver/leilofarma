@@ -11,7 +11,7 @@ if ($getlj->num_rows() == 0):
 else:
 
     $resultlj = $getlj->result_array();
-    $arrayreplace = array("(", ")", "-");
+    $arrayreplace = array("(", ")", "-","/");
 
     $nome = $resultlj[0]['nome_loja'];
 
@@ -53,7 +53,7 @@ endif;
 
                         <?php
 
-                        $max = 15;
+                        $max = 30;
                         if (!isset($_GET['pg']) or isset($_GET['pg']) and $_GET['pg'] <= 1):
 
                            $atual = 0;
@@ -86,12 +86,12 @@ endif;
 
 
                                 ?>
-                                <div class="col-md-4" title="<?php echo $dds['nome']; ?>">
+                                <div class="col-md-4" title="<?php echo $dds['nome']; ?>" style="height: 300px;">
                                     <div class="product-img product-img-brd">
                                         <a href="<?php echo base_url('produto/' . $this->uri->segment(2) . '/' . str_replace(' ', '-', str_replace($arrayreplace, '', strtolower($dds['nome']))) . '/' . $dds['id_pdp']); ?>"><img
                                                 class="full-width img-responsive"
                                                 style="height: 200px; object-fit: cover; object-position: center;"
-                                                src="<?php echo base_url('imagem?tp=1&&im=1&&image=' . $dds['id'] . '') ?>"
+                                                src="<?php echo $dds['image_1']; ?>"
                                                 alt=""></a>
 
                                         <a class="add-to-cart"

@@ -361,9 +361,9 @@ background: white;
 
 
                 <ul class="nav navbar-nav navbar-right" id="linksheader">
-                    <li><a href="#" class="active">Home</a></li>
-                    <li><a href="#">Quem Somos</a></li>
-                    <li><a href="#">Fale conosco</a></li>
+                    <li><a href="<?php echo base_url('');?>" class="active">Home</a></li>
+                    <li><a href="<?php echo base_url('termos-de-uso');?>">Quem Somos</a></li>
+                    <li><a href="mailto:joaovictordada2@gmail.com">Fale conosco</a></li>
 
                     <div id="iconsinsas" style="position:absolute;right: 10%;top:35%;" class="nav navbar-nav navbar-right">
 

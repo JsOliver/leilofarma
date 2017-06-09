@@ -18,6 +18,7 @@ class AjaxControler extends CI_Controller
         ini_set('max_execution_time','100000');
     }
 
+
     public function produtoshome()
     {
 
@@ -303,7 +304,7 @@ class AjaxControler extends CI_Controller
                 if (isset($dds->oferta_valor)): $preco = $dds->oferta_valor;
                 else: $preco = ''; endif;
                 if (isset($dds->oferta_link)): $link_produto = $dds->oferta_link;
-                else: $link_produto = ''; endif;
+                else: if(isset($dds->link_produto)): $link_produto = $dds->link_produto; else: $link_produto = ''; endif;  endif;
                 if (isset($dds->desconto)): $desconto = $dds->desconto;
                 else: $desconto = ''; endif;
                 if (isset($dds->categoria1)): $categoria1 = $dds->categoria1;
@@ -322,8 +323,10 @@ class AjaxControler extends CI_Controller
                 else: $miligramas = ''; endif;
                 if (isset($dds->opcional->indicacoes)): $indicacoes = $dds->opcional->indicacoes;
                 else: $indicacoes = ''; endif;
-                if (isset($dds->oferta_img)): $imagem1 = $dds->oferta_img;
-                else: $imagem1 = ''; endif;
+                if (isset($dds->oferta_img) and !isset($dds->oferta_imgproduto)): $imagem1 = $dds->oferta_img;
+                else:  $imagem1 = ''; endif;
+
+                if(isset($dds->oferta_imgproduto)): $imagem1 = $dds->oferta_imgproduto; else: $imagem1 = '//leilofarma.com.br/default.png'; endif;
                 if (isset($dds->imagem2)): $imagem2 = $dds->imagem2;
                 else: $imagem2 = ''; endif;
                 if (isset($dds->imagem3)): $imagem3 = $dds->imagem3;
@@ -425,7 +428,7 @@ class AjaxControler extends CI_Controller
                             endif;
 
                             if (!empty($imagem2)):
-                               //$dados['image_2'] = trim(file_get_contents(addslashes($imagem2)));
+                                //$dados['image_2'] = trim(file_get_contents(addslashes($imagem2)));
                             endif;
 
                             /*if(!empty($categoria1)):
@@ -466,7 +469,7 @@ class AjaxControler extends CI_Controller
 
                 endif;
 
-                sleep(3);
+                //sleep(3);
             }
 
             /*
@@ -568,10 +571,10 @@ class AjaxControler extends CI_Controller
 
                     $mailtxt = base64_decode($results[0]['email']);
 
-    $body = $mailtxt;
+                    $body = $mailtxt;
 
-                   $this->db->from('lojas');
-                   $getLojas = $this->db->get();
+                    $this->db->from('lojas');
+                    $getLojas = $this->db->get();
                     $countLojas = $getLojas->num_rows();
                     if($countLojas > 0){
 
@@ -579,20 +582,26 @@ class AjaxControler extends CI_Controller
                         $subject = "Um cliente deu um lance em um produto";
 
 
-                        foreach ($resultLojas as $row){
-                            /* Insert nas outras lojas */
-                            $data["id_loja"] = $row["id_loja"];
-                            $this->db->insert('lances', $data);
+                        $ems = '';
 
-                            $this->Myphpmailer_Model->send_mail($subject, str_replace('(<=p=>)',$result[0]['nome_prod'],str_replace('(<=$=>)',$_POST['valor'],str_replace('(<=q=>)',$_POST['quantidade'],str_replace('(<=c=>)',$_SESSION['NAME'],str_replace('(<=em=>)',$_SESSION['EMAIL'],$body))))), $row["email"]);
+                        foreach ($resultLojas as $row){
+                            $ems .= $row['email'].'(<==>)';
+
+
+                            /* Insert nas outras lojas */
+                            //$data["id_loja"] = $row["id_loja"];
+                            //$this->db->insert('lances', $data);
 
                         }
-                    /* Fim envio de e-mail para as farmácias */
+
+
+                        $this->Myphpmailer_Model->send_mail($subject, str_replace('(<=p=>)',$result[0]['nome_prod'],str_replace('(<=$=>)',$_POST['valor'],str_replace('(<=q=>)',$_POST['quantidade'],str_replace('(<=c=>)',$_SESSION['NAME'],str_replace('(<=em=>)',$_SESSION['EMAIL'],$body))))), $ems);
+                        /* Fim envio de e-mail para as farmácias */
 
                     }
 
-                else
-                    echo 'Quantidade em estoque limite atingida. Escolha entre 1 e ' . $unidade . ' unidades.';
+                    else
+                        echo 'Quantidade em estoque limite atingida. Escolha entre 1 e ' . $unidade . ' unidades.';
                 endif;
 
 
@@ -673,7 +682,7 @@ class AjaxControler extends CI_Controller
 
 
 
-                        else:
+                    else:
                         echo 'Quantidade em estoque limite atingida. Escolha entre 1 e ' . $unidade . ' unidades.';
                     endif;
 

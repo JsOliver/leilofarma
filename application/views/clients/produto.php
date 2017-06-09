@@ -56,7 +56,11 @@ endif;
                 style="color: #940f14;font-weight: 600;"><?php echo ucwords(str_replace('%20', '', $resultmed[0]['nome'])); ?></li>
         </ul>
     </div>
-
+    <style>
+        .ms-container{
+            display:none;
+        }
+    </style>
     <div class="container">
         <div class="row">
             <div class="col-md-4 md-margin-bottom-50">
@@ -79,29 +83,9 @@ endif;
                         if(!empty($resps[0]['image_1'])):
                             ?>
 
-                            <div class="ms-slide">
-                                <img class="ms-brd"
-                                     src="<?php echo $resps[0]['image_1'] ?>"
-                                     alt="<?php echo  str_replace('-',' ',ucwords($this->uri->segment(3)));?>">
-                                <img class="ms-thumb" style="height: 110px;object-fit: cover; object-position: center;"
-                                     src="<?php echo $resps[0]['image_1'] ?>"
-                                     alt="<?php echo  str_replace('-',' ',ucwords($this->uri->segment(3)));?>">
-                            </div>
-                            <div class="ms-slide">
-                                <img class="ms-brd"
-                                     src="<?php echo $resps[0]['image_1'] ?>"
-                                     alt="<?php echo  str_replace('-',' ',ucwords($this->uri->segment(3)));?>">
-                                <img class="ms-thumb" style="height: 110px;object-fit: cover; object-position: center;"
-                                     src="<?php echo $resps[0]['image_1'] ?>"
-                                     alt="<?php echo  str_replace('-',' ',ucwords($this->uri->segment(3)));?>">
-                            </div>
 
                             <?php else:?>
 
-
-                                <img style="width: 150px;top: 0;"
-                                     src="<?php echo base_url('assets/'.$version.'/img/remedio.jpg')?>"
-                                     alt="<?php echo  str_replace('-',' ',ucwords($this->uri->segment(3)));?>">
 
 
 
@@ -113,30 +97,18 @@ endif;
                             if(!empty($query->result_array()['image_2'])):
 
                             ?>
-                                <div class="ms-slide">
-                                    <img class="ms-brd"
-                                         src="<?php echo $resps[0]['image_2'] ?>"
-                                         alt="<?php echo  str_replace('-',' ',ucwords($this->uri->segment(3)));?>">
-                                    <img class="ms-thumb" style="height: 110px;object-fit: cover; object-position: center;"
-                                         src="<?php echo $resps[0]['image_2'] ?>"
-                                         alt="<?php echo  str_replace('-',' ',ucwords($this->uri->segment(3)));?>">
-                                </div>
-                                <div class="ms-slide">
-                                    <img class="ms-brd"
-                                         src="<?php echo $resps[0]['image_1'] ?>"
-                                         alt="<?php echo  str_replace('-',' ',ucwords($this->uri->segment(3)));?>">
-                                    <img class="ms-thumb" style="height: 110px;object-fit: cover; object-position: center;"
-                                         src="<?php echo $resps[0]['image_1'] ?>"
-                                         alt="<?php echo  str_replace('-',' ',ucwords($this->uri->segment(3)));?>">
-                                </div>
                                 <?php else:?>
-                            <div class="ms-slide">
+                            <div class="" style="position:absolute">
                                 <img class="ms-brd"
-                                     src="<?php echo $resps[0]['image_1'] ?>"
+                                    style="width: 350px; height: 250px;"  src="<?php echo $resultmed[0]['image_1']?>"
                                      alt="<?php echo  str_replace('-',' ',ucwords($this->uri->segment(3)));?>">
-                                
+
                             </div>
-                          
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+
 
                                 <?php endif;?>
 
@@ -377,7 +349,7 @@ endif;
 
 
                                                         <img style="width: 100%;"
-                                                             src="<?php echo base_url('imagem?tp=5&&im=1&&image=' . $this->uri->segment(4) . '') ?>">
+                                                             src="<?php echo $rest[0]['image_1']; ?>">
                                                     <?php else:?>
 
 
@@ -392,13 +364,15 @@ endif;
                                                     $this->db->from('produtos_disponiveis');
                                                     $this->db->where('id_pdp', $this->uri->segment(4));
                                                     $query = $this->db->get();
-                                                    if(!empty($query->result_array()['image_1'])):
+                                                    $resps = $query->result_array();
+
+                                                    if(!empty($resps[0]['image_1'])):
 
                                                         ?>
 
 
                                                         <img style="width: 100%;"
-                                                             src="<?php echo base_url('imagem?tp=5&&im=1&&image=' . $this->uri->segment(4) . '') ?>">
+                                                             src="<?php echo $rest[0]['image_1']; ?>">
                                                     <?php else:?>
 
                                                         <img style="width: 100%;"
@@ -528,30 +502,7 @@ endif;
                                                             size="2" type="number" id="quantidadecard" placeholder="1" value="1">
                                                     </label>
                                                 </form>
-                                                <?php if(!empty($resultmed[0]['fixa_cal'])):?>
 
-                                                    <p style="margin-top: 5px;">
-                                                        <b>Detalhes:</b>  <?php echo $resultmed[0]['fixa_cal'];?>
-                                                    </p>
-                                                <?php endif;?>
-
-                                                <?php if(!empty($resultmed[0]['posologia'])):?>
-                                                    <p>
-                                                        <b>Posologia:</b>  <?php echo $resultmed[0]['posologia'];?>
-                                                    </p>
-                                                <?php endif;?>
-                                                <?php if(!empty($resultmed[0]['indicacoes'])):?>
-
-                                                    <p>
-                                                        <b>Indicações:</b> <?php echo $resultmed[0]['indicacoes'];?>
-                                                    </p>
-                                                <?php endif;?>
-                                                <?php if(!empty($resultmed[0]['contra_indicacoes'])):?>
-
-                                                    <p>
-                                                        <b>Contra Indicações:</b> <?php echo $resultmed[0]['contra_indicacoes'];?>
-                                                    </p>
-                                                <?php endif;?>
                                             </div>
                                         </div>
                                         <div class="col-md-4" style="border: 1px solid #dfdfdf;">
@@ -574,7 +525,7 @@ endif;
 
 
                                                         <img style="width: 100%;"
-                                                             src="<?php echo base_url('imagem?tp=5&&im=1&&image=' . $this->uri->segment(4) . '') ?>">
+                                                             src="<?php echo $resps[0]['image_1']; ?>">
                                                     <?php else:?>
 
 
@@ -589,13 +540,15 @@ endif;
                                                     $this->db->from('produtos_disponiveis');
                                                     $this->db->where('id_pdp', $this->uri->segment(4));
                                                     $query = $this->db->get();
-                                                    if(!empty($query->result_array()['image_1'])):
+                                                    $resps = $query->result_array();
+
+                                                    if(!empty($resps[0]['image_1'])):
 
                                                         ?>
 
 
                                                         <img style="width: 100%;"
-                                                             src="<?php echo base_url('imagem?tp=5&&im=1&&image=' . $this->uri->segment(4) . '') ?>">
+                                                             src="<?php echo  $resps[0]['image_1']; ?>">
                                                     <?php else:?>
 
                                                         <img style="width: 100%;"
@@ -696,9 +649,19 @@ endif;
     <?php
 
     $this->db->from('produtos_disponiveis');
-    $this->db->like('keywords',$result[0]['keywords']);
-    $get = $this->db->order_by('preco','asc','desconto','desc');
-    $get = $this->db->limit(5,0);
+    $explode = explode(' ',$result[0]['nome_prod']);
+    //$this->db->like('nome_prod',$explode[0]);
+
+    $this->db->like('nome_prod',$explode[0].' '.$explode[1]);
+
+    $cex = count($explode);
+    for($ns=0;$ns<1;$ns++):
+        if(!empty($explode[$ns])):
+        //$this->db->or_like('keywords',$explode[$ns]);
+        endif;
+    endfor;
+    $get = $this->db->order_by('pesquisas_farma','desc','preco','asc','desconto','desc');
+    $get = $this->db->limit(6,0);
 
     $get = $this->db->get();
     $countts = $get->num_rows();
