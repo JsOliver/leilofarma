@@ -43,8 +43,14 @@ endif;
 
 ?>
 
+<style>
 
+</style>
 <br>
+<br>
+<br>
+<br>
+
 <div class="shop-product">
     <div class="container">
         <ul class="breadcrumb-v5">
@@ -76,12 +82,12 @@ endif;
                         if (empty($rest[0]['image_1'])):
 
 
-                        $this->db->from('produtos_disponiveis');
-                        $this->db->where('id_pdp', $this->uri->segment(4));
-                        $query = $this->db->get();
+                            $this->db->from('produtos_disponiveis');
+                            $this->db->where('id_pdp', $this->uri->segment(4));
+                            $query = $this->db->get();
                             $resps = $query->result_array();
-                        if(!empty($resps[0]['image_1'])):
-                            ?>
+                            if(!empty($resps[0]['image_1'])):
+                                ?>
 
 
                             <?php else:?>
@@ -89,58 +95,58 @@ endif;
 
 
 
-                        <?php endif; else:
+                            <?php endif; else:
 
                             $this->db->from('produtos_disponiveis');
                             $this->db->where('id_pdp', $this->uri->segment(4));
                             $query = $this->db->get();
                             if(!empty($query->result_array()['image_2'])):
 
-                            ?>
-                                <?php else:?>
-                            <div class="" style="position:absolute">
-                                <img class="ms-brd"
-                                    style="width: 350px; height: 250px;"  src="<?php echo $resultmed[0]['image_1']?>"
-                                     alt="<?php echo  str_replace('-',' ',ucwords($this->uri->segment(3)));?>">
+                                ?>
+                            <?php else:?>
+                                <div class="" style="position:absolute">
+                                    <img class="ms-brd"
+                                         style="width: 330px; height: 250px;"  src="<?php echo $resultmed[0]['image_1']?>"
+                                         alt="<?php echo  str_replace('-',' ',ucwords($this->uri->segment(3)));?>">
 
-                            </div>
+                                </div>
                                 <br>
                                 <br>
                                 <br>
                                 <br>
 
 
-                                <?php endif;?>
+                            <?php endif;?>
 
                             <?php
 
                             if(!empty($result[0]['image_3'])):
 
-                            ?>
-                            <div class="ms-slide">
-                                <img class="ms-brd"
-                                     src="<?php echo $resps[0]['image_3'] ?>"
-                                     alt="<?php echo  str_replace('-',' ',ucwords($this->uri->segment(3)));?>">
-                                <img class="ms-thumb" style="height: 110px;object-fit: cover; object-position: center;"
-                                     src="<?php echo $resps[0]['image_3'] ?>"
-                                     alt="<?php echo  str_replace('-',' ',ucwords($this->uri->segment(3)));?>">
-                            </div>
-                                <?php endif;?>
+                                ?>
+                                <div class="ms-slide">
+                                    <img class="ms-brd"
+                                         src="<?php echo $resps[0]['image_3'] ?>"
+                                         alt="<?php echo  str_replace('-',' ',ucwords($this->uri->segment(3)));?>">
+                                    <img class="ms-thumb" style="height: 110px;object-fit: cover; object-position: center;"
+                                         src="<?php echo $resps[0]['image_3'] ?>"
+                                         alt="<?php echo  str_replace('-',' ',ucwords($this->uri->segment(3)));?>">
+                                </div>
+                            <?php endif;?>
 
-                        <?php
+                            <?php
 
-                        if(!empty($result[0]['image_4'])):
+                            if(!empty($result[0]['image_4'])):
 
-                            ?>
-                            <div class="ms-slide">
-                                <img class="ms-brd"
-                                     src="<?php echo $resps[0]['image_4'] ?>"
-                                     alt="<?php echo  str_replace('-',' ',ucwords($this->uri->segment(3)));?>">
-                                <img class="ms-thumb" style="height: 110px;object-fit: cover; object-position: center;"
-                                     src="<?php echo $resps[0]['image_4'] ?>"
-                                     alt="<?php echo  str_replace('-',' ',ucwords($this->uri->segment(3)));?>">
-                            </div>
-                        <?php endif;?>
+                                ?>
+                                <div class="ms-slide">
+                                    <img class="ms-brd"
+                                         src="<?php echo $resps[0]['image_4'] ?>"
+                                         alt="<?php echo  str_replace('-',' ',ucwords($this->uri->segment(3)));?>">
+                                    <img class="ms-thumb" style="height: 110px;object-fit: cover; object-position: center;"
+                                         src="<?php echo $resps[0]['image_4'] ?>"
+                                         alt="<?php echo  str_replace('-',' ',ucwords($this->uri->segment(3)));?>">
+                                </div>
+                            <?php endif;?>
 
                         <?php endif; ?>
 
@@ -173,7 +179,7 @@ endif;
                 <ul class="list-inline add-to-wishlist add-to-wishlist-brd">
                     <br>
                     <li class="wishlist-in">
-                         <a data-toggle="modal" data-target="#addcard"  style="cursor:pointer;font-size: 9pt;font-weight: 600;">Adicionar ao Carrinho</a>
+                        <a data-toggle="modal" data-target="#addcard"  style="cursor:pointer;font-size: 9pt;font-weight: 600;">Adicionar ao Carrinho</a>
                     </li>
 
                 </ul>
@@ -192,10 +198,10 @@ endif;
                         ?>
                         <li class="shop-red">
                             R$<?php echo number_format($result[0]['preco'] - $result[0]['preco'] / 100 * $result[0]['desconto'], 2, ',', '.'); ?>
-                           </li>
+                        </li>
                         <li class="line-through">
                             R$<?php echo number_format($result[0]['preco'], 2, ',', '.'); ?>
-                           </li>
+                        </li>
 
 
                     <?php endif; ?>
@@ -233,23 +239,23 @@ endif;
                     $get = $this->db->get();
                     $countc = $get->num_rows();
                     if ($countc > 0):
-                    $fetch = $get->result_array();
+                        $fetch = $get->result_array();
                         echo '<a href="' . base_url('busca/' . str_replace(' ', '-', str_replace($arrayreplace, '', strtolower($fetch[0]['nome'])))) . '">' . $fetch[0]['nome'].'</a>';
 
                     endif;
 
                     ?>
-</p>
+                </p>
 
-<div class="addthis_inline_share_toolbox"></div>
+                <div class="addthis_inline_share_toolbox"></div>
 
-</p>
+                </p>
             </div>
 
 
 
             <div class="col-md-3">
-                <div style="padding: 0 0 0 20%; text-align: center;">
+                <div class="lancsdisplay" style="">
                     <h4>Não Achou o preço justo?</h4>
                     <h4><b>Quer pagar Quanto?</b></h4>
                     <a data-toggle="modal" data-target="#lance" class="btn"
@@ -259,7 +265,7 @@ endif;
                         <br>
                         <li class="wishlist-in">
                             <a  style="font-size: 9pt;font-weight: 600;">Produto de Responsabilidade do Vendedor</a>
-                           <!-- <a  data-toggle="modal" data-target="#addcard"  style="font-size: 9pt;font-weight: 600;">Adicionar a Lista de Interesse</a>-->
+                            <!-- <a  data-toggle="modal" data-target="#addcard"  style="font-size: 9pt;font-weight: 600;">Adicionar a Lista de Interesse</a>-->
                         </li>
 
                     </ul>
@@ -288,9 +294,9 @@ endif;
 
                                             <div style="text-align: left;">
                                                 <form>
-                                                    <label style="width: 50%;">
-                                                        <b style="font-size: 15pt;">R$</b>
-
+                                                    <label style="width: 45%;">
+                                                        <b style="font-size: 13pt;">R$</b>
+                                                        <br><br>
                                                         <input
                                                             style="outline: none;border-radius: 5px;padding: 2%; font-size: 12pt; margin-top:-12px;box-shadow: none !important; border: 1px solid #cccccc;"
                                                             size="9" type="text" id="moneys"
@@ -318,8 +324,9 @@ endif;
 
                                                         ?>">
                                                     </label>
-                                                    <label style="width:35%;">
-                                                        <b style="font-size: 12pt;">Qntd.</b>
+                                                    <label style="width:30%;">
+                                                        <b class="das" style="font-size: 12pt;">Qntd.</b><br><br>
+
 
                                                         <input
                                                             style="outline: none;width:70px;border-radius: 5px;padding: 2%; font-size: 12pt; margin-top:-12px;box-shadow: none !important; border: 1px solid #cccccc;"
@@ -382,7 +389,7 @@ endif;
 
                                                 <?php endif; ?>
 
-</a>
+                                            </a>
                                         </div>
                                         <?php if ($status == false): ?>
                                             <div class="col-md-12">
@@ -391,32 +398,32 @@ endif;
                                                     campos abaixo para que nossos especialistas entrem em contato.</h5>
                                                 <div style="text-align: left;">
                                                     <br>
-                                                    <label style="width: 48%;">
+                                                    <label style="width: 100%;">
                                                         <b>Nome:</b>
                                                         <input id="nomenl"
-                                                            style="padding: 2%;outline: none;border-radius: 5px;border: 1px solid #cccccc;"
-                                                            type="text" placeholder="Seu nome">
+                                                               style="width:90%;padding: 1%;outline: none;border-radius: 5px;border: 1px solid #cccccc;"
+                                                               type="text" placeholder="Seu nome">
                                                     </label>
 
-                                                    <label style="width: 47%;">
+                                                    <label style="width: 100%;">
                                                         <b>E-mail:</b>
                                                         <input id="emailnl"
-                                                            style="padding: 2%;outline: none;border-radius: 5px;border: 1px solid #cccccc;"
-                                                            type="text" placeholder="Seu e-mail">
+                                                               style="width:90%;padding: 1%;outline: none;border-radius: 5px;border: 1px solid #cccccc;"
+                                                               type="text" placeholder="Seu e-mail">
                                                     </label>
                                                     <br>
                                                     <br>
                                                     <label style="width: 100%;">
                                                         <b>Telefone:</b>
                                                         <input id="dddnl"
-                                                            style="padding: 1%;outline: none;border-radius: 5px;border: 1px solid #cccccc;"
-                                                            type="text" placeholder="DDD" size="2">
+                                                               style="padding: 1%;outline: none;border-radius: 5px;border: 1px solid #cccccc;"
+                                                               type="text" placeholder="DDD" size="2">
                                                         <input id="telefonenl"
-                                                            style="padding: 1%;outline: none; border-radius: 5px;border: 1px solid #cccccc;"
-                                                            type="text" placeholder="" size="14">
+                                                               style="padding: 1%;outline: none; border-radius: 5px;border: 1px solid #cccccc;"
+                                                               type="text" placeholder="" size="14">
                                                         <span id="btns">   <a href="javascript:lance('<?php echo $result[0]['id_loja'];?>' , '<?php echo '#MD0'.$resultmed[0]['id'].''; ?>' , '<?php echo $this->uri->segment(4);?>');" class="btn"
-                                                           style="background:#ae1b21;color: white; width:40%; margin: 0 0 0 2%;border-radius: 5px;padding: 2.1% 1% 2.1% 1%;font-weight: 600;"><i
-                                                                class="fa fa-gavel" aria-hidden="true"></i> DAR
+                                                                              style="background:#ae1b21;color: white; width:40%; margin: 0 0 0 2%;border-radius: 5px;padding: 2.1% 1% 2.1% 1%;font-weight: 600;"><i
+                                                                    class="fa fa-gavel" aria-hidden="true"></i> DAR
                                                             LANCE</a> </span>
                                                         <br>
                                                         <h3 style="text-align: center;" id="lanceresult"></h3>
@@ -427,9 +434,9 @@ endif;
                                             </div>
 
                                         <?php else: ?>
-                                           <span id="btns"> <a href="javascript:lance('<?php echo $result[0]['id_loja'];?>' , '<?php echo '#MD0'.$resultmed[0]['id'].''; ?>' , '<?php echo $this->uri->segment(4);?>');" class="btn"
-                                               style="background:#ae1b21;color: white; width:30%; float: right; margin: 10px 0 0 1%;border-radius: 5px;padding: 2.1% 0.5% 2.1% 0.5%;font-weight: 600;"><i
-                                                    class="fa fa-gavel" aria-hidden="true"></i> DAR LANCE</a> </span>
+                                            <span id="btns"> <a href="javascript:lance('<?php echo $result[0]['id_loja'];?>' , '<?php echo '#MD0'.$resultmed[0]['id'].''; ?>' , '<?php echo $this->uri->segment(4);?>');" class="btn"
+                                                                style="background:#ae1b21;color: white; width:30%; float: right; margin: 10px 0 0 1%;border-radius: 5px;padding: 2.1% 0.5% 2.1% 0.5%;font-weight: 600;"><i
+                                                        class="fa fa-gavel" aria-hidden="true"></i> DAR LANCE</a> </span>
                                             <br>
                                             <b id="lanceresult"></b>
                                         <?php endif; ?>
@@ -561,11 +568,11 @@ endif;
                                             </a>
                                         </div>
 
-                                           <span id="btnscr"> <a href="javascript:addcard('<?php echo $result[0]['id_loja'];?>' , '<?php echo '#MD0'.$resultmed[0]['id'].''; ?>' , '<?php echo $this->uri->segment(4);?>');" class="btn"
-                                               style="background:#ae1b21;color: white; width:30%; float: right; margin: 10px 0 0 1%;border-radius: 5px;padding: 2.1% 0.5% 2.1% 0.5%;font-weight: 600;"><i
+                                        <span id="btnscr"> <a href="javascript:addcard('<?php echo $result[0]['id_loja'];?>' , '<?php echo '#MD0'.$resultmed[0]['id'].''; ?>' , '<?php echo $this->uri->segment(4);?>');" class="btn"
+                                                              style="background:#ae1b21;color: white; width:30%; float: right; margin: 10px 0 0 1%;border-radius: 5px;padding: 2.1% 0.5% 2.1% 0.5%;font-weight: 600;"><i
                                                     class="fa fa-card" aria-hidden="true"></i> Add ao Carrinho</a> </span>
-                                            <br>
-                                            <b id="lanceresult"></b>
+                                        <br>
+                                        <b id="lanceresult"></b>
                                     </div>
 
                                 </div>
@@ -593,7 +600,7 @@ endif;
             </div>
             <div class="row margin-bottom-5">
                 <div class="col-sm-12 result-category">
-<!--
+                    <!--
                     <?php if(!empty($resultmed[0]['fixa_cal'])):?>
 
                         <p style="margin-top: 5px;">
@@ -657,7 +664,7 @@ endif;
     $cex = count($explode);
     for($ns=0;$ns<1;$ns++):
         if(!empty($explode[$ns])):
-        //$this->db->or_like('keywords',$explode[$ns]);
+            //$this->db->or_like('keywords',$explode[$ns]);
         endif;
     endfor;
     $get = $this->db->order_by('pesquisas_farma','desc','preco','asc','desconto','desc');
@@ -668,77 +675,82 @@ endif;
     if($countts > 0):
 
         $resultsd = $get->result_array();
-    ?>
-    <br>
-    <table class="table">
-        <tr style="border-top: 10px solid white;">
-            <th style="color: #969696;padding-left: 3.5%;">PRODUTO</th>
-            <th style="color: #969696;padding-left: 3.5%;">FARMÁCIA</th>
-            <th style="color: #969696;padding-left: 3.5%;">EM ESTOQUE</th>
-            <th style="color: #969696;padding-left: 3.5%;">TELEFONE</th>
-            <th style="color: #969696;padding-left: 3.5%;">VALOR</th>
-        </tr>
-        <?php
-
-        foreach ($resultsd as $dds){
         ?>
-        <tr>
-            <td style="font-weight: bold;color: #940f14;text-align: center;"><a style="color: #940f14;"><?php echo $dds['nome_prod'];?></a></td>
+        <br>
+        <table class="table comparativs">
+            <tr style="border-top: 10px solid white;">
+                <th style="color: #969696;padding-left: 3.5%;">PRODUTO</th>
+                <th style="color: #969696;padding-left: 3.5%;">FARMÁCIA</th>
+                <th style="color: #969696;padding-left: 3.5%;">EM ESTOQUE</th>
+                <th style="color: #969696;padding-left: 3.5%;">TELEFONE</th>
+                <th style="color: #969696;padding-left: 3.5%;">VALOR</th>
+                <th style="color: #969696;padding-left: 3.5%;">COMPRAR</th>
 
+            </tr>
             <?php
 
-            $this->db->from('lojas');
-            $this->db->where('id_loja',$dds['id_loja']);
-            $get = $this->db->get();
-            $countlj = $get->num_rows();
-            if($countlj > 0):
-                $resultlj = $get->result_array();
-            ?>
-            <td style="font-weight: bold;color: #940f14;text-align: center;"><a href="<?php echo base_url('loja/'.str_replace(' ', '-', str_replace($arrayreplace, '', strtolower($resultlj[0]['nome_loja']))).'/'.$dds['id_loja']);?>" style="color: #940f14;"><?php echo $resultlj[0]['nome_loja']?></a></td>
-<?php else:?>
-
-                <td> -- --</td>
-                <?php endif;?>
-
-            <?php if($dds['unidades'] == '0'):?>
-                <td style="text-align: center;"><i style="color: #ae1b21;" class="fa fa-times" aria-hidden="true"></i></td>
-
-            <?php else:?>
-                <td style="text-align: center;"><i style="color: #30944c;" class="fa fa-check" aria-hidden="true"></i></td>
-
-
-                <?php endif;?>
-            <?php if($countlj > 0):?>
-            <td style="text-align: center;"><?php echo $resultlj[0]['telefone'];?></td>
-                <?php else:?>
-                <td> -- --</td>
-
-            <?php endif;?>
-            <?php if(empty($dds['desconto'])):
-            ?>
-                <td style="">
-                    <span style="color: #727272;margin: 0 0 0 10%;" class="line-through"><span
-                        style="font-weight: bold;color: #940f14;" class="shop-red">R$<?php echo number_format($dds['preco'],2,'.',',');?></span>
-                </td>
-                <?php else:?>
-
-                <td style="text-align: center;">
-                    <span style="color: #727272;text-decoration: line-through;" class="line-through">de R$<?php echo number_format($dds['preco'],2,'.',',');?></span> <span
-                        style="font-weight: bold;color: #940f14;" class="shop-red">R$<?php echo number_format($dds['preco'] - $dds['preco'] / 100 * $dds['desconto'], 2, ',', '.');?></span> &nbsp;&nbsp;&nbsp; <span
-                        style=" padding: 1% 2% 1% 2% ;color: white;font-weight: 600; background: #972227;">- <?php echo $dds['desconto'];?>% OFF</span>
-                </td>
-                <?php
-
-                endif;
+            foreach ($resultsd as $dds){
                 ?>
+                <tr>
+                    <td style="font-weight: bold;color: #940f14;text-align: center;"><a href="<?php echo base_url('produto/'.str_replace(' ', '-', str_replace($arrayreplace, '', strtolower($resultlj[0]['nome_loja']))).'/'.str_replace(' ', '-', str_replace($arrayreplace, '', strtolower($dds['nome_prod']))).'/'.$dds['id_pdp']);?>" style="color: #940f14;"><?php echo $dds['nome_prod'];?></a></td>
 
-        </tr>
+                    <?php
 
-        <?php }?>
+                    $this->db->from('lojas');
+                    $this->db->where('id_loja',$dds['id_loja']);
+                    $get = $this->db->get();
+                    $countlj = $get->num_rows();
+                    if($countlj > 0):
+                        $resultlj = $get->result_array();
+                        ?>
+                        <td style="font-weight: bold;color: #940f14;text-align: center;"><a href="<?php echo base_url('loja/'.str_replace(' ', '-', str_replace($arrayreplace, '', strtolower($resultlj[0]['nome_loja']))).'/'.$dds['id_loja']);?>" style="color: #940f14;"><?php echo $resultlj[0]['nome_loja']?></a></td>
+                    <?php else:?>
+
+                        <td> -- --</td>
+                    <?php endif;?>
+
+                    <?php if($dds['unidades'] == '0'):?>
+                        <td style="text-align: center;"><i style="color: #ae1b21;" class="fa fa-times" aria-hidden="true"></i></td>
+
+                    <?php else:?>
+                        <td style="text-align: center;"><i style="color: #30944c;" class="fa fa-check" aria-hidden="true"></i></td>
 
 
-    </table>
-    <br>
+                    <?php endif;?>
+                    <?php if($countlj > 0):?>
+                        <td style="text-align: center;"><?php echo $resultlj[0]['telefone'];?></td>
+                    <?php else:?>
+                        <td> -- --</td>
+
+                    <?php endif;?>
+                    <?php if(empty($dds['desconto'])):
+                        ?>
+                        <td style="">
+                    <span style="color: #727272;margin: 0 0 0 10%;" class="line-through"><span
+                            style="font-weight: bold;color: #940f14;" class="shop-red">R$<?php echo number_format($dds['preco'],2,'.',',');?></span>
+                        </td>
+                    <?php else:?>
+
+                        <td style="text-align: center;">
+                            <span style="color: #727272;text-decoration: line-through;" class="line-through">de R$<?php echo number_format($dds['preco'],2,'.',',');?></span> <span
+                                style="font-weight: bold;color: #940f14;" class="shop-red">R$<?php echo number_format($dds['preco'] - $dds['preco'] / 100 * $dds['desconto'], 2, ',', '.');?></span> &nbsp;&nbsp;&nbsp; <span
+                                style=" padding: 1% 2% 1% 2% ;color: white;font-weight: 600; background: #972227;">- <?php echo $dds['desconto'];?>% OFF</span>
+                        </td>
+                        <?php
+
+                    endif;
+                    ?>
+                    <td>
+                        <a href="<?php echo $result[0]['link_produto'];?>" target="_blank" class="btn" style="background:#dc0000;width: 100%;color: white;border-radius: 0;padding: 3%;font-weight: 600;"><i class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></i> Comprar</a>
+                    </td>
+
+                </tr>
+
+            <?php }?>
+
+
+        </table>
+        <br>
     <?php endif;?>
 
 
